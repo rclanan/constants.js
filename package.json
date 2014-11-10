@@ -1,0 +1,32 @@
+{
+  "name": "constants.js",
+  "version": "0.0.0",
+  "description": "A small library providing utility methods to get and set constants as well as provides default constants. ",
+  "main": "dist/constants.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rclanan/constants.js.git"
+  },
+  "keywords": [
+    "constants"
+  ],
+  "author": "Jim Kelly <email> (http://domain/)",
+  "contributors": [
+    "Ray Clanan <rclanan@utopianconcept.com> (http://utopianconcept.com/)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rclanan/constants.js/issues"
+  },
+  "homepage": "https://github.com/rclanan/constants.js",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "karma": "^0.12.24",
+    "karma-mocha": "^0.1.9",
+    "mocha": "^2.0.1",
+    "requirejs": "^2.1.15"
+  }
+}
