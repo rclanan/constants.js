@@ -6,7 +6,7 @@
     // CommonJS
     module.exports = factory();
   } else {
-    // Browser Global (mylib is your global library identifier)
+    // Browser Global (constants is your global library identifier)
     window.constants = factory();
   }
 }(this, function() {
