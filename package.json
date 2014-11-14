@@ -8,20 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rclanan/constants.js.git"
+    "url": "https://github.com/fusionalliance/constants.js.git"
   },
   "keywords": [
     "constants"
   ],
-  "author": "Jim Kelly <email> (http://domain/)",
+  "author": "Fusion Alliance (http://www.fusionalliance.com/)",
   "contributors": [
+    "Jim Kelly <email> (http://domain/)",
     "Ray Clanan <rclanan@utopianconcept.com> (http://utopianconcept.com/)"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rclanan/constants.js/issues"
+    "url": "https://github.com/fusionalliance/constants.js/issues"
   },
-  "homepage": "https://github.com/rclanan/constants.js",
+  "homepage": "https://github.com/fusionalliance/constants.js",
   "devDependencies": {
     "gulp": "^3.8.10",
     "karma": "^0.12.24",

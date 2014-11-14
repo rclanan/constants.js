@@ -1,4 +1,5 @@
 # constants.js
+A small library providing utility methods to get and set constants as well as provides default constants
 
 ### Getting Started
 The project depends on [Bower](https://github.com/bower/bower) and [Gulp.js](http://gulpjs.com). Assuming
@@ -11,7 +12,7 @@ sudo npm install -g gulp bower
 Next, clone the repository and install project dependencies:
 ```bash
 # Fetch only the latest commits.
-git clone --depth=1 git@github.com:rclanan/constants.js.git
+git clone --depth=1 git@github.com:fusionalliance/constants.js.git
 
 cd constantsjs
 
@@ -28,13 +29,13 @@ npm install
 ### Structure
 
 ### Contributing
-If you have any suggestions, or found a bug please open a GitHub issue and I will
-get to it as soon as I can.
+If you have any suggestions, or found a bug please open a GitHub issue and we will
+get to it as soon as we can.
 
 ### License
 The MIT License (MIT)
 
-Copyright (c) 2014 Jim Kelly/Ray Clanan
+Copyright (c) 2014 Fusion Alliance
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
