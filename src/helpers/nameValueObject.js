@@ -16,6 +16,7 @@ define(['helpers/format'], function(format) {
     if (!addErrors) {
       addErrors = {};
     }
+
     addErrors.add = 'can not overwrite add';
 
     nameValueObject = {};

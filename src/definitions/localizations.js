@@ -3,16 +3,10 @@ define(['helpers/nameValueObject'], function(nameValueObject) {
 
   var localization, superAdd;
 
-  function buildLocalizationRequest(localizationValue) {
-    return function() {
-      return localization.$localizationValueRequest(localizationValue);
-    };
-  }
-
   function buildLocalizationValue(localizationValue) {
     return {
       name: localizationValue,
-      getLocalizedValue: buildLocalizationRequest(localizationValue)
+      getLocalizedValue: localization.$getLocalizedValue(localizationValue)
     };
   }
 
@@ -36,8 +30,8 @@ define(['helpers/nameValueObject'], function(nameValueObject) {
     superAdd(givenValues);
   };
 
-  localization.$setLocalizationRequest = function(localizationRequestFunction) {
-    localization.$localizationValueRequest = localizationRequestFunction;
+  localization.$setGetLocalizedValueFunction = function(getLocalizedValue) {
+    localization.$getLocalizedValue = getLocalizedValue;
   };
 
   localization.$add({});

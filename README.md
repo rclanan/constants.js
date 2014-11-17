@@ -16,7 +16,7 @@ Next, clone the repository and install project dependencies:
 # Fetch only the latest commits.
 git clone --depth=1 git@github.com:fusionalliance/constants.js.git
 
-cd constantsjs
+cd constants.js
 
 bower install
 npm install
@@ -24,6 +24,72 @@ npm install
 
 ### Usage
 
+Setup:
+
+```javascript
+var TAGS, IDS, CLASSES, EVENTS, ATTRIBUTES, LOCALS, FUEL_ACTIONS;
+
+TAGS = constants.tags;
+IDS = constants.ids;
+CLASSES = constants.classes;
+EVENTS = constants.events;
+ATTRIBUTES = constants.attributes;
+LOCALS = constants.localizations;
+FUEL_ACTIONS = constants.fuelActions;
+
+IDS.$add({
+
+});
+
+CLASSES.$add({
+
+});
+
+EVENTS.$add({
+
+});
+
+ATTRIBUTES.$add({
+
+});
+
+LOCALS.$add({
+
+});
+
+FUEL_ACTIONS.$add({
+
+});
+
+LOCALS.$setGetLocalizedValueFunction(function(localizationValue){
+  return strings.GetStringResource(localizationValue);
+});
+
+TAGS.$setElementBuilderFunction(function(elementHtml){
+  return $(elementHtml);
+});
+
+CLASSES.$setFindElementsFunction(function(selector){
+  return $(selector);
+});
+
+IDS.$setFindElementsFunction(function(selector){
+  return $(selector);
+});
+```
+
+Usage:
+
+```javascript
+TAGS.{element}.buildElement();
+TAGS.{element}.{html, name}
+LOCALS.{name}.getLocalizedValue();
+CLASSES.{someClass}.findElements();
+CLASSES.{someClass}.{name, selector}
+IDS.{someId}.findElements();
+IDS.{someId}.{name, selector}
+ATTRIBUTES.{name}
+```
 
 ### Tests
 
@@ -32,8 +98,6 @@ Simply run:
 ```
 npm test
 ```
-
-Or if you have installed **Karma** globally via npm, first run 'karma start', then 'karma run'. It will perform a single a single test run using **Jasmine** testing framework via **PhantomJS** headless browser. Both testing framework and browser are configurable in **karma.conf.js**.
 
 ### Contributing
 
