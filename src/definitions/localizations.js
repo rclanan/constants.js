@@ -24,6 +24,7 @@ define(['helpers/nameValueObject'], function(nameValueObject) {
 
   localization.$add = function(nameValues) {
     var givenValues, localizationName;
+
     givenValues = {};
 
     for (localizationName in nameValues) {

@@ -5,8 +5,7 @@ define(['helpers/nameValueObject'], function(nameValueObject) {
 
   events = nameValueObject.createNameValueObject();
   events.$add({
-    click: 'click',
-    global: 'global'
+    click: 'click'
   });
 
   return events;

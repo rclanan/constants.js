@@ -3,7 +3,7 @@ define(['helpers/domConstants'], function(domConstants) {
 
   var classes;
 
-  classes = domConstants.buildDomConstantsObject('names', '.');
+  classes = domConstants.buildDomConstantsObject('.');
   classes.$add({
     active: 'active',
     inactive: 'inactive'

@@ -1,41 +1,44 @@
 define([], function() {
   'use strict';
 
-  function buildDomConstantsObject(mainValueName, selectorSymbol) {
-    var domConstant, valueNames, selectors;
+  function buildDomConstantsObject(selectorSymbol) {
+    var domConstant, superAdd, createDomValue;
 
-    function addSelector(name) {
-      if (!selectors) {
-        selectors = {};
-      }
+    domConstant = nameValueObject.createNameValueObject({}, function(nameValue) {
+      return nameValue.value.name;
+    });
 
-      selectors[name] = selectorSymbol + valueNames[name];
-    }
+    superAdd = domConstant.$add;
 
-    // nameValues: {name:'', value:''}, can be array of this object.
-    function addNames(nameValues) {
-      var name;
+    createDomValue = function(domValue) {
+      var selector = selectorSymbol + domValue;
 
-      for (name in valueNames) {
-        if (nameValues.hasOwnProperty(name)) {
-          if (name !== 'add') {
-            valueNames[name] = nameValues[name];
-          } else {
-            throw new Error('can not overwrite add');
-          }
+      return {
+        name: domValue,
+        selector: selector,
+        findElements: function() {
+          return domConstant.$findElements(selector);
+        }
+      };
+    };
+
+    domConstant.$add = function(nameValues) {
+      var domName, valuesToAdd;
+
+      valuesToAdd = {};
+
+      for (domName in nameValues) {
+        if (nameValues.hasOwnProperty(domName)) {
+          valuesToAdd[domName] = createDomValue(nameValues[name]);
         }
       }
 
-      addSelector(name);
-    }
+      superAdd(valuesToAdd);
+    };
 
-    domConstant = {};
-    selectors = {};
-    valueNames = {};
-
-    Object.defineProperty(domConstant, mainValueName, { get: function() { return valueNames;}});
-    Object.defineProperty(domConstant, 'selectors', { get: function() { return selectors;}});
-    domConstant.add = addNames;
+    domConstant.$setFindElementsFunction = function(findElements) {
+      domConstant.$findElements = findElements;
+    };
 
     return domConstant;
   }

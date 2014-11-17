@@ -3,7 +3,7 @@ define(['helpers/domConstants'], function(domConstants) {
 
   var ids;
 
-  ids = domConstants.buildDomConstantsObject('name', '#');
+  ids = domConstants.buildDomConstantsObject('#');
   ids.$add({});
 
   return ids;

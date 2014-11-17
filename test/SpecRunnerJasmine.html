@@ -21,11 +21,11 @@
   <script type="text/javascript">
     // Require test specs here
     require([
-      'spec/random',
-      'spec/slugify'
+      'spec/format',
     ], function() {
       var jasmineEnv = jasmine.getEnv();
       var htmlReporter = new jasmine.HtmlReporter();
+
       jasmineEnv.updateInterval = 1000;
       jasmineEnv.addReporter(htmlReporter);
       jasmineEnv.specFilter = function(spec) {

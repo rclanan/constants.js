@@ -11,7 +11,8 @@ define(['helpers/nameValueObject'], function(nameValueObject) {
     title: 'title',
     type: 'type',
     width: 'width',
-    height: 'height'
+    height: 'height',
+    style: 'style'
   });
 
   return attributes;
