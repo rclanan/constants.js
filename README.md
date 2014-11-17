@@ -27,6 +27,13 @@ npm install
 
 ### Tests
 
+Simply run:
+
+```
+npm test
+```
+
+Or if you have installed **Karma** globally via npm, first run 'karma start', then 'karma run'. It will perform a single a single test run using **Jasmine** testing framework via **PhantomJS** headless browser. Both testing framework and browser are configurable in **karma.conf.js**.
 
 ### Contributing
 
