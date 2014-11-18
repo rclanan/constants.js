@@ -77,7 +77,7 @@ define(['helpers/format'], function(format) {
       }
     }
 
-    nameValueObject.add = add;
+    nameValueObject.$add = add;
 
     return nameValueObject;
   }
