@@ -56,10 +56,6 @@ LOCALS.$add({
 
 });
 
-FUEL_ACTIONS.$add({
-
-});
-
 LOCALS.$setGetLocalizedValueFunction(function(localizationValue){
   return strings.GetStringResource(localizationValue);
 });
