@@ -6,7 +6,7 @@ define(['helpers/nameValueObject'], function(nameValueObject) {
   function buildLocalizationValue(localizationValue) {
     return {
       name: localizationValue,
-      getLocalizedValue: localization.$getLocalizedValue(localizationValue)
+      getLocalizedValue: function() { return localization.$getLocalizedValue(localizationValue); };
     };
   }
 
