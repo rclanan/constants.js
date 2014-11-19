@@ -24,11 +24,12 @@ npm install
 
 ### Usage
 
-Setup:
+#### Setup:
 
 ```javascript
 var TAGS, IDS, CLASSES, EVENTS, ATTRIBUTES, LOCALS;
 
+// These are not needed, just added for shorthand access. For example, you could call constants.tags.$add({}) instead.
 TAGS = constants.tags;
 IDS = constants.ids;
 CLASSES = constants.classes;
@@ -37,54 +38,82 @@ ATTRIBUTES = constants.attributes;
 LOCALS = constants.localizations;
 
 IDS.$add({
-
+ {name}: '{value}'
 });
 
 CLASSES.$add({
-
+  {name}: '{value}'
 });
 
 EVENTS.$add({
-
+  {name}: '{value}'
 });
 
 ATTRIBUTES.$add({
-
+  {name}: '{value}'
 });
 
 LOCALS.$add({
-
+  {name}: '{value}'
 });
 
 LOCALS.$setGetLocalizedValueFunction(function(localizationValue){
-  return strings.GetStringResource(localizationValue);
+  // Replace with implementation of localization lookup
+  return localizationValue;
 });
 
 TAGS.$setElementBuilderFunction(function(elementHtml){
-  return $(elementHtml);
+  // For native JavaScript
+  return document.querySelectorAll(elementHtml);
+
+  // For jquery support
+  //return $(elementHtml);
 });
 
 CLASSES.$setFindElementsFunction(function(selector){
-  return $(selector);
+  // For native JavaScript
+  return document.getElementsByClassName(selector);
+
+  // For jquery support
+  //return $(selector);
 });
 
 IDS.$setFindElementsFunction(function(selector){
-  return $(selector);
+  // For native JavaScript
+  return document.getElementById(selector);
+
+  // For jquery support
+  //return $(selector);
 });
 ```
 
-Usage:
+#### Usage:
 
 ```javascript
 TAGS.{element}.buildElement();
 TAGS.{element}.{html, name}
-LOCALS.{name}.getLocalizedValue();
-CLASSES.{someClass}.findElements();
-CLASSES.{someClass}.{name, selector}
+
 IDS.{someId}.findElements();
 IDS.{someId}.{name, selector}
+
+CLASSES.{someClass}.findElements();
+CLASSES.{someClass}.{name, selector}
+
+EVENTS.{name}
+
 ATTRIBUTES.{name}
+
+LOCALS.{name}.getLocalizedValue();
 ```
+
+#### Predefined constants:
+
+In the definitions folder, you can find the files for tags, css classes, attributes, and events. In those files, are the predefined names and values that are accessible through any of the cooresponding objects.
+
+If you find that you are using the same name and values in your files that are not predefined, it's suggested that you add them to the predefined values so they do not have to be defined repeatedly.
+
+The predefined constants are based on HTML5 Canidate Recommendations from the W3C, HTML 5.1 Editor's Draft, and the "living" HTML specification from Web Hypertext Application Technology Working Group (WHATWG).
+
 
 ### Tests
 
