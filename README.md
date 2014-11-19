@@ -27,7 +27,7 @@ npm install
 Setup:
 
 ```javascript
-var TAGS, IDS, CLASSES, EVENTS, ATTRIBUTES, LOCALS, FUEL_ACTIONS;
+var TAGS, IDS, CLASSES, EVENTS, ATTRIBUTES, LOCALS;
 
 TAGS = constants.tags;
 IDS = constants.ids;
@@ -35,7 +35,6 @@ CLASSES = constants.classes;
 EVENTS = constants.events;
 ATTRIBUTES = constants.attributes;
 LOCALS = constants.localizations;
-FUEL_ACTIONS = constants.fuelActions;
 
 IDS.$add({
 
