@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/rclanan/constants.js.png?label=ready&title=Ready)](https://waffle.io/rclanan/constants.js)
 # constants.js
 
 A small library providing utility methods to get and set constants as well as provides default constants
