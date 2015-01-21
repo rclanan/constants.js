@@ -5,7 +5,7 @@
   "main": "dist/constants.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fusionalliance/constants.js.git"
+    "url": "git@github.com:fusionalliance/constants.js.git"
   },
   "keywords": [
     "constants"
