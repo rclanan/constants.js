@@ -1,4 +1,5 @@
 define(['helpers/format'], function(format) {
+ 'use strict';
 
   describe('Format', function() {
     it('should return same string when no replacements are made', function() {

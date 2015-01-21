@@ -1,15 +1,21 @@
 [![Stories in Ready](https://badge.waffle.io/rclanan/constants.js.png?label=ready&title=Ready)](https://waffle.io/rclanan/constants.js)
 # constants.js
 
-A small library providing utility methods to get and set constants as well as provides default constants
+constants handling library for JavaScript
+
+constants.js is designed to be used with [Require.js](http://requirejs.org)
+
+This library is set up to help have a common place to declare constants and use between files, as well as help get rid of commonly repeated code related to these constants.
+
+Suggested use is to make a dedicated constants file to use between files, this will contain your Classes, Ids, Attributes, and Events. Already included are HTML tags and browser events.
 
 ### Getting Started
 
 The project depends on [Bower](https://github.com/bower/bower) and [Gulp.js](http://gulpjs.com). Assuming
 you already have **Node.js** installed on your system, run the following command:
 
-```
-sudo npm install -g gulp bower
+```bash
+npm install -g gulp bower
 ```
 
 Next, clone the repository and install project dependencies:
@@ -27,84 +33,125 @@ npm install
 
 #### Setup:
 
+Defining the constants file:
+
 ```javascript
-var TAGS, IDS, CLASSES, EVENTS, ATTRIBUTES, LOCALS;
+define([
+  'jQuery', // for finding and building elements
+  'constants' // constants library
+  ], function ($, constantsBuilder) {
+  'use strict';
 
-// These are not needed, just added for shorthand access. For example, you could call constants.tags.$add({}) instead.
-TAGS = constants.tags;
-IDS = constants.ids;
-CLASSES = constants.classes;
-EVENTS = constants.events;
-ATTRIBUTES = constants.attributes;
-LOCALS = constants.localizations;
+  var constants = constantsBuilder.buildConstantsObject();
 
-IDS.$add({
- {name}: '{value}'
-});
+  // This defines the IDS that are going to be used
+  constants.ids.$add({
+    listCreateName: 'listCreateName',
+    listCreateDescription: 'listCreateDescription',
+  });
 
-CLASSES.$add({
-  {name}: '{value}'
-});
+  // Define the custom Classes we want to add
+  constants.classes.$add({
+    buttonPrimary: 'button-primary',
+    inputLabel: 'input-label',
+  });
 
-EVENTS.$add({
-  {name}: '{value}'
-});
+  // defining custom events
+  constants.events.$add({
+    nameChange: 'change:name',
+    typeChange: 'change:type',
+    descriptionChange: 'change:description'
+  });
 
-ATTRIBUTES.$add({
-  {name}: '{value}'
-});
+  // defining custom attributes, the base attributes for HTML should already exist.
+  constants.attributes.$add({
+    attributeId: 'attrid'
+  });
 
-LOCALS.$add({
-  {name}: '{value}'
-});
+  // defining localization values that we will be using
+  constants.localizations.$add({
+    description: 'DESCRIPTION',
+    detailListTypeStandard: 'DETAIL_LIST_TYPE_STANDARD',
+  });
 
-LOCALS.$setGetLocalizedValueFunction(function(localizationValue){
-  // Replace with implementation of localization lookup
-  return localizationValue;
-});
+  // Here, we define what helper methods to call, this section helps to utilize
+  // existing libraries in use with our constants to help cut down on copy-pasta and
+  // long lines of code.
 
-TAGS.$setElementBuilderFunction(function(elementHtml){
-  // For native JavaScript
-  return document.querySelectorAll(elementHtml);
+  // this defines the localizations.getLocalizedValue() method.
+  // example call: constants.localizations.description.getLocalizedValue();
+  constants.localizations.$setGetLocalizedValueFunction(function(localizationValue){
+    return globalize.getLocalizedValue(localizationValue); // Make a call to some function that returns our localized value
+  });
 
-  // For jquery support
-  //return $(elementHtml);
-});
+  // this defines the HTML element building function, here we are using JQuery, but any
+  // library can be used, what gets passed in is the HTML for the element.
+  // example call:
+  // var divEl = constants.tags.div.buildElement();
+  constants.tags.$setElementBuilderFunction(function(elementHtml){
+    return $(elementHtml);
+  });
 
-CLASSES.$setFindElementsFunction(function(selector){
-  // For native JavaScript
-  return document.getElementsByClassName(selector);
+  // this defines the findElements function for constants.classes. this function should return
+  // all instances of the class.
+  // to be used (so, if the class was 'input-label', you would get passed '.input-label')
+  // example call:
+  // var inputLabel = constants.classes.inputLabel.findElements();
+  constants.classes.$setFindElementsFunction(function(selector){
+    return $(selector);
+  });
 
-  // For jquery support
-  //return $(selector);
-});
+  // this defines the findElements function for constants.ids. this function should return
+  // all instances of the ID.
+  // to be used (so, if the ID was 'listCreateName', you would get passed '#listCreateName')
+  // example call:
+  // var listCreateNameEl = constants.IDS.listCreateName.findElements();
+  constants.ids.$setFindElementsFunction(function(selector){
+    return $(selector);
+  });
 
-IDS.$setFindElementsFunction(function(selector){
-  // For native JavaScript
-  return document.getElementById(selector);
-
-  // For jquery support
-  //return $(selector);
+return constants;
 });
 ```
 
-#### Usage:
+When using the defined constants file, the usage is also simple. If the file above was named "listContants.js", and was defined in Require to be "listContants" the usage would be like the following:
 
 ```javascript
-TAGS.{element}.buildElement();
-TAGS.{element}.{html, name}
+define(['listConstants'], function(listConstants){
+  var CLASSES, IDS, TAGS, LOCALS, EVENTS, ATTRIBUTES;
 
-IDS.{someId}.findElements();
-IDS.{someId}.{name, selector}
+  CLASSES = listConstants.classes;
+  ATTRIBUTES = listConstants.attributes;
+  IDS = listConstants.ids;
+  TAGS = listConstants.tags;
+  LOCALS = listConstants.localizations;
+  EVENTS = listConstants.events;
 
-CLASSES.{someClass}.findElements();
-CLASSES.{someClass}.{name, selector}
+  //classes examples:
+  var className = CLASSES.inputLabel.name; // 'input-label'
+  var classSelector = CLASSES.inputLabel.selector // '.input-label'
+  var classEl = CLASSES.inputLabel.findElements(); // should return all instances if findElements is defined for classes in the constants file correctly.
 
-EVENTS.{name}
+  // ids examples
+  var idName = IDS.listCreateName.name; // 'listCreateName'
+  var idSelector = IDS.listCreateName.selector // '#listCreateName'
+  var idEl = IDS.listCreateName.findElements(); // should return all instances if findElements is defined for classes in the constants file correctly.
 
-ATTRIBUTES.{name}
+  // Localizations examples
+  var localizationName = LOCALS.description.name; // return "DESCRIPTION", as defined in the listConstants.js
+  var localizationText = LOCALS.description.getLocalizedValue(); // returns what the localization function would return if "DESCRIPTION" was passed into it.
 
-LOCALS.{name}.getLocalizedValue();
+  // Attributes examples
+  var attributeName = ATTRIBUTES.attributeId; // returns 'attrId'
+
+  // Events examples
+  var eventName = EVENTS.click; // this wasn't defined in listConstants, but is a common browser event and already defined. returns 'click';
+
+  // HTML Tag examples:
+  var divName = TAGS.div.name; // returns 'div'
+  var divHtml = TAGS.div.html; // returns '<div />'
+  var divEl = TAGS.div.buildElement(); // returns a new div Element if correctly defined in listConstants.js
+});
 ```
 
 #### Predefined constants:
@@ -121,7 +168,7 @@ The predefined constants are based on HTML5 Canidate Recommendations from the W3
 Simply run:
 
 ```
-npm test
+gulp karma
 ```
 
 ### Contributing

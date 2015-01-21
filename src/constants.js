@@ -1,4 +1,5 @@
-define(['definitions/cssClasses',
+define([
+  'definitions/cssClasses',
   'definitions/ids',
   'definitions/attributes',
   'definitions/tags',
@@ -7,20 +8,18 @@ define(['definitions/cssClasses',
 ], function(classes, ids, attributes, tags, events, localizations) {
   'use strict';
 
-  // Object constructor
-  var constants = function(obj) {
-    return obj;
+  function buildConstantsObject() {
+    return {
+      classes: classes.buildConstantsObject(),
+      ids: ids.buildConstantsObject(),
+      attributes: attributes.buildConstantsObject(),
+      tags: tags.buildConstantsObject(),
+      events: events.buildConstantsObject(),
+      localizations: localizations.buildConstantsObject()
+    };
+  }
+
+  return {
+    buildConstantsObject: buildConstantsObject
   };
-
-  // Properties
-  constants.VERSION = '0.0.0';
-
-  constants.classes = classes;
-  constants.ids = ids;
-  constants.attributes = attributes;
-  constants.tags = tags;
-  constants.events = events;
-  constants.localizations = localizations;
-
-  return constants;
 });

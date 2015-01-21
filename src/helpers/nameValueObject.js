@@ -36,15 +36,15 @@ define(['helpers/format'], function(format) {
     }
 
     function buildNameExistsError(nameValue) {
-      return new Error(format(nameExistsError), nameValue);
+      return new Error(format(nameExistsError, nameValue));
     }
 
     function buildValueExistsError(nameValue) {
-      return new Error(format(valueExistsError),
+      return new Error(format(valueExistsError,
                       {givenName: nameValue.name,
                         name: valueNameObject[getValueKey(nameValue)],
                         value: getValueKey(nameValue)
-                      });
+                      }));
     }
 
     function throwRelevantError(nameValue) {

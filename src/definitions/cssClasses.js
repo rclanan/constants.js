@@ -1,13 +1,18 @@
 define(['helpers/domConstants'], function(domConstants) {
   'use strict';
 
-  var classes;
+  function buildConstantsObject() {
+    var classes = domConstants.buildDomConstantsObject('.');
 
-  classes = domConstants.buildDomConstantsObject('.');
-  classes.$add({
-    active: 'active',
-    inactive: 'inactive'
-  });
+    classes.$add({
+      active: 'active',
+      inactive: 'inactive'
+    });
 
-  return classes;
+    return classes;
+  }
+
+  return {
+    buildConstantsObject: buildConstantsObject
+  };
 });

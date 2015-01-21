@@ -1,7 +1,19 @@
-var gulp, rjs;
+var del, gulp, rjs, gutil, clean, jshint, karma;
 
 gulp = require('gulp');
+gutil = require('gulp-util');
+clean = require('gulp-clean');
+jshint = require('gulp-jshint');
+
+del = require('del');
 rjs = require('requirejs');
+karma = require('karma').server;
+
+gulp.task('clean', ['clean-reports']);
+
+gulp.task('clean-reports', function(done) {
+  del(['./reports'], done);
+});
 
 gulp.task('requirejs', function() {
   rjs.optimize({
@@ -30,8 +42,45 @@ gulp.task('requirejs', function() {
   });
 });
 
-gulp.task('watch', function() {
-  gulp.watch('src/**/*.js', ['requirejs']);
+gulp.task('karma', function(done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true,
+  }, done);
 });
 
-gulp.task('default', ['requirejs', 'watch']);
+gulp.task('karma:all', function(done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true,
+    browsers: ['PhantomJS', 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'IE']
+  }, done);
+});
+
+gulp.task('karma:debug', function(done){
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: false,
+    browsers: ['Chrome'],
+    flags: ['--debug'],
+    preprocessors: {},
+  }, done);
+});
+
+gulp.task('karma:watch', function(done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
+  }, done);
+});
+
+gulp.task('lint', function() {
+  return gulp.src(['src/**/*.js', '!src/_*.js'])
+  .pipe(jshint())
+  .pipe(jshint.reporter('default'));
+});
+
+gulp.task('watch', ['clean', 'lint', 'karma', 'requirejs'], function() {
+  gulp.watch(['src/**/*.js', '!src/_*.js'], ['lint', 'karma','requirejs']);
+});
+
+gulp.task('default', ['clean', 'karma', 'lint', 'requirejs', 'watch']);

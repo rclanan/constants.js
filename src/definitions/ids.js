@@ -1,10 +1,15 @@
 define(['helpers/domConstants'], function(domConstants) {
   'use strict';
 
-  var ids;
+  function buildDomConstantsObject() {
+    var ids = domConstants.buildDomConstantsObject('#');
 
-  ids = domConstants.buildDomConstantsObject('#');
-  ids.$add({});
+    ids.$add({});
 
-  return ids;
+    return ids;
+  }
+
+  return {
+    buildDomConstantsObject: buildDomConstantsObject
+  };
 });

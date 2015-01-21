@@ -1,4 +1,4 @@
-define(['nameValueObject'], function(nameValueObject) {
+define(['helpers/nameValueObject'], function(nameValueObject) {
   'use strict';
 
   function buildDomConstantsObject(selectorSymbol) {

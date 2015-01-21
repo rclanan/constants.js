@@ -1,11 +1,8 @@
 {
   "name": "constants.js",
-  "version": "0.0.0",
-  "description": "A small library providing utility methods to get and set constants as well as provides default constants. ",
+  "version": "0.0.1",
+  "description": "constants handling library for JavaScript",
   "main": "dist/constants.js",
-  "scripts": {
-    "test": "karma start --single-run --browsers PhantomJS"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/fusionalliance/constants.js.git"
@@ -15,7 +12,7 @@
   ],
   "author": "Fusion Alliance (http://www.fusionalliance.com/)",
   "contributors": [
-    "Jim Kelly <email> (http://domain/)",
+    "Jim Kelly <Talk@ProgrammerWithouta.Name> (http://programmerwithouta.name/)",
     "Ray Clanan <rclanan@utopianconcept.com> (http://utopianconcept.com/)"
   ],
   "license": "MIT",
@@ -24,13 +21,22 @@
   },
   "homepage": "https://github.com/fusionalliance/constants.js",
   "devDependencies": {
+    "browser-sync": "^1.9.0",
+    "del": "^1.1.1",
     "gulp": "^3.8.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-jshint": "^1.9.0",
+    "gulp-util": "^3.0.2",
+    "jasmine-core": "^2.1.3",
     "karma": "^0.12.25",
-    "karma-jasmine": "^0.2.3",
-    "karma-mocha": "^0.1.9",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-coverage": "^0.2.7",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-ie-launcher": "^0.1.5",
+    "karma-jasmine": "~0.3.5",
+    "karma-opera-launcher": "^0.1.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-requirejs": "^0.2.2",
-    "mocha": "^2.0.1",
     "requirejs": "^2.1.15"
   }
 }
