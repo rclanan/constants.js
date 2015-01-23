@@ -12,4 +12,6 @@ buildConstantsObject = function() {
   return ids;
 };
 
-module.exports = buildConstantsObject;
+module.exports = {
+  buildConstantsObject:buildConstantsObject
+};

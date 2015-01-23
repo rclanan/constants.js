@@ -6,4 +6,6 @@ var format = function(stringToFormat, values) {
   });
 };
 
-module.exports = format;
+module.exports = {
+  format: format
+};

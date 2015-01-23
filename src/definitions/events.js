@@ -80,4 +80,6 @@ buildConstantsObject = function() {
   return events;
 };
 
-module.exports = buildConstantsObject;
+module.exports = {
+  buildConstantsObject:buildConstantsObject
+};

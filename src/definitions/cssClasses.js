@@ -15,4 +15,6 @@ buildConstantsObject = function() {
   return classes;
 };
 
-module.exports = buildConstantsObject;
+module.exports = {
+  buildConstantsObject:buildConstantsObject
+};

@@ -7,9 +7,9 @@ module.exports = function(config) {
 
     // List of files or patterns to load in the browser
     files: [
-      { pattern: 'src/**/*.js', included: false },
-      { pattern: 'test/spec/**/*.js', included: false },
-      'test/test-main.js'
+    { pattern: 'src/**/*.js', included: false },
+    { pattern: 'test/spec/**/*.js', included: false },
+    'test/test-main.js'
     ],
 
     // list of files to exclude
@@ -56,10 +56,10 @@ module.exports = function(config) {
 
     coverageReporter: {
       reporters: [
-        { type: 'html', dir: 'reports/test/unit/coverage' },
-        { type: 'lcovonly', dir: 'reports/test/unit/coverage' },
-        { type: 'json', dir: 'reports/test/unit/coverage' },
-        { type: 'cobertura', dir: 'reports/test/unit/coverage' }
+      { type: 'html', dir: 'reports/test/unit/coverage' },
+      { type: 'lcovonly', dir: 'reports/test/unit/coverage' },
+      { type: 'json', dir: 'reports/test/unit/coverage' },
+      { type: 'cobertura', dir: 'reports/test/unit/coverage' }
       ]
     }
   });

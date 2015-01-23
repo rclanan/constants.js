@@ -46,4 +46,6 @@ buildDomConstantsObject = function(selectorSymbol) {
   return domConstant;
 };
 
-module.exports = buildDomConstantsObject;
+module.exports = {
+  buildDomConstantsObject: buildDomConstantsObject
+};

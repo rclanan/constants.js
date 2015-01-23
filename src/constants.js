@@ -21,4 +21,6 @@ buildConstantsObject = function() {
     };
 };
 
-module.exports = buildConstantsObject;
+module.exports = {
+  buildConstantsObject: buildConstantsObject
+};

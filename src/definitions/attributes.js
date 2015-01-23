@@ -207,4 +207,6 @@ buildConstantsObject = function() {
   return attributes;
 };
 
-module.exports = buildConstantsObject;
+module.exports = {
+  buildConstantsObject: buildConstantsObject
+};

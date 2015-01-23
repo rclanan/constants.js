@@ -163,4 +163,6 @@ buildConstantsObject = function() {
   return tags;
 };
 
-module.exports = buildConstantsObject;
+module.exports = {
+  buildConstantsObject:buildConstantsObject
+};

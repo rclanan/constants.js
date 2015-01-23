@@ -1,8 +1,8 @@
 'use strict';
 
-var format, createNameValueObject, nameExistsError, valueExistsError;
+var formatLibrary, createNameValueObject, nameExistsError, valueExistsError;
 
-format = require('./helpers/format');
+formatLibrary = require('./helpers/format');
 
 nameExistsError = 'name "{name}" is already in use, value is {value}';
 valueExistsError = 'given name {givenName} with a value of "{value}" already exists with a name of "{name}"';
@@ -37,11 +37,11 @@ createNameValueObject = function(addErrors, valueKeyFunction) {
   }
 
   function buildNameExistsError(nameValue) {
-    return new Error(format(nameExistsError, nameValue));
+    return new Error(formatLibrary.format(nameExistsError, nameValue));
   }
 
   function buildValueExistsError(nameValue) {
-    return new Error(format(valueExistsError,
+    return new Error(formatLibrary.format(valueExistsError,
                     {givenName: nameValue.name,
                       name: valueNameObject[getValueKey(nameValue)],
                       value: getValueKey(nameValue)
@@ -83,4 +83,6 @@ createNameValueObject = function(addErrors, valueKeyFunction) {
   return nameValueObject;
 };
 
-module.exports = createNameValueObject;
+module.exports = {
+  createNameValueObject: createNameValueObject
+};

@@ -45,4 +45,6 @@ buildConstantsObject = function() {
   return localization;
 };
 
-module.exports = buildConstantsObject;
+module.exports = {
+  buildConstantsObject:buildConstantsObject
+};
