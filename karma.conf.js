@@ -25,7 +25,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jasmine', 'browserify'],
 
     // Enable or disable watching files and executing the tests
     // whenever one of these files changes.

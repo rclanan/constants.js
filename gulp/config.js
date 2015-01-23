@@ -23,5 +23,8 @@ module.exports = {
   production: {
     jsSrc: dest + '/*.js',
     dest: dest
+  },
+  karma: {
+    configFile: __dirname + '/../karma.conf.js'
   }
 };
