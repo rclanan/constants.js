@@ -1,25 +1,24 @@
-define([
-  'definitions/cssClasses',
-  'definitions/ids',
-  'definitions/attributes',
-  'definitions/tags',
-  'definitions/events',
-  'definitions/localizations'
-], function(classes, ids, attributes, tags, events, localizations) {
-  'use strict';
+'use strict';
 
-  function buildConstantsObject() {
+var cssClasses, ids, attributes, tags, events, localizations, buildConstantsObject;
+
+cssClasses = require('./definitions/cssClasses');
+ids = require('./definitions/ids');
+attributes = require('./definitions/attributes');
+tags = require('./definitions/tags');
+events = require('./definitions/events');
+localizations = require('./definitions/localizations');
+
+
+buildConstantsObject = function() {
     return {
-      classes: classes.buildConstantsObject(),
+      classes: cssClasses.buildConstantsObject(),
       ids: ids.buildConstantsObject(),
       attributes: attributes.buildConstantsObject(),
       tags: tags.buildConstantsObject(),
       events: events.buildConstantsObject(),
       localizations: localizations.buildConstantsObject()
     };
-  }
+};
 
-  return {
-    buildConstantsObject: buildConstantsObject
-  };
-});
+module.exports = buildConstantsObject;

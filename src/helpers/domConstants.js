@@ -1,49 +1,49 @@
-define(['helpers/nameValueObject'], function(nameValueObject) {
-  'use strict';
+'use strict';
 
-  function buildDomConstantsObject(selectorSymbol) {
-    var domConstant, superAdd, createDomValue;
+var nameValueObject, buildDomConstantsObject;
 
-    domConstant = nameValueObject.createNameValueObject({}, function(nameValue) {
-      return nameValue.value.name;
-    });
+nameValueObject = require('./helpers/nameValueObject');
 
-    superAdd = domConstant.$add;
+buildDomConstantsObject = function(selectorSymbol) {
+  var domConstant, superAdd, createDomValue;
 
-    createDomValue = function(domValue) {
-      var selector = selectorSymbol + domValue;
+  domConstant = nameValueObject.createNameValueObject({}, function(nameValue) {
+    return nameValue.value.name;
+  });
 
-      return {
-        name: domValue,
-        selector: selector,
-        findElements: function() {
-          return domConstant.$findElements(selector);
-        }
-      };
-    };
+  superAdd = domConstant.$add;
 
-    domConstant.$add = function(nameValues) {
-      var domName, valuesToAdd;
+  createDomValue = function(domValue) {
+    var selector = selectorSymbol + domValue;
 
-      valuesToAdd = {};
-
-      for (domName in nameValues) {
-        if (nameValues.hasOwnProperty(domName)) {
-          valuesToAdd[domName] = createDomValue(nameValues[name]);
-        }
+    return {
+      name: domValue,
+      selector: selector,
+      findElements: function() {
+        return domConstant.$findElements(selector);
       }
-
-      superAdd(valuesToAdd);
     };
-
-    domConstant.$setFindElementsFunction = function(findElements) {
-      domConstant.$findElements = findElements;
-    };
-
-    return domConstant;
-  }
-
-  return {
-    buildDomConstantsObject: buildDomConstantsObject
   };
-});
+
+  domConstant.$add = function(nameValues) {
+    var domName, valuesToAdd;
+
+    valuesToAdd = {};
+
+    for (domName in nameValues) {
+      if (nameValues.hasOwnProperty(domName)) {
+        valuesToAdd[domName] = createDomValue(nameValues[name]);
+      }
+    }
+
+    superAdd(valuesToAdd);
+  };
+
+  domConstant.$setFindElementsFunction = function(findElements) {
+    domConstant.$findElements = findElements;
+  };
+
+  return domConstant;
+};
+
+module.exports = buildDomConstantsObject;

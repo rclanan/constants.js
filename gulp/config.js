@@ -17,7 +17,7 @@ module.exports = {
       dest: dest,
       outputName: 'constants.js',
       require: [],
-      external: ['almond']
+      external: []
     }]
   },
   production: {

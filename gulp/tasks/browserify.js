@@ -1,6 +1,6 @@
 'use strict';
 
-var browserify, browserifyTask, browserSync, watchify, bundleLogger, gulp, handleErrors, source, buffer, sourcemaps, config, wrap;
+var browserify, browserifyTask, browserSync, watchify, bundleLogger, gulp, handleErrors, source, buffer, sourcemaps, config, wrap, concat;
 
 browserify = require('browserify');
 browserSync = require('browser-sync');
@@ -13,6 +13,7 @@ source = require('vinyl-source-stream');
 buffer = require('vinyl-buffer');
 config = require('../config').browserify;
 wrap = require('gulp-wrap');
+concat = require('gulp-concat');
 
 browserifyTask = function(callback, devMode) {
   var bundleQueue, browserifyThis;
@@ -34,15 +35,16 @@ browserifyTask = function(callback, devMode) {
         .on('error', handleErrors)
         .pipe(source(bundleConfig.outputName))
         .pipe(buffer())
-        .pipe(wrap({ src: './src/_start.js' }))
+        .pipe(concat(bundleConfig.outputName))
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sourcemaps.write('./'))
+        .pipe(wrap({ src: './src/_bundleTemplate.js' }))
         .pipe(gulp.dest(bundleConfig.dest))
         .on('end', reportFinished)
         .pipe(browserSync.reload({stream:true}));
     };
 
-    if(devMode) {
+    if (devMode) {
       browserifyLoader = watchify(browserifyLoader);
       browserifyLoader.on('update', bundle);
       bundleLogger.watch(bundleConfig.outputName);
@@ -59,10 +61,10 @@ browserifyTask = function(callback, devMode) {
     reportFinished = function() {
       bundleLogger.end(bundleConfig.outputName);
 
-      if(bundleQueue) {
+      if (bundleQueue) {
         bundleQueue--;
 
-        if(bundleQueue === 0) {
+        if (bundleQueue === 0) {
           callback();
         }
       }
