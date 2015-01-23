@@ -10,3 +10,6 @@
     window.constants = factory();
   }
 }(this, function() {
+  <%= contents %>
+  return require('constants');
+}));
