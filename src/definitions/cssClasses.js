@@ -1,18 +1,18 @@
-define(['helpers/domConstants'], function(domConstants) {
-  'use strict';
+'use strict';
 
-  function buildConstantsObject() {
-    var classes = domConstants.buildDomConstantsObject('.');
+var domConstants, buildConstantsObject;
 
-    classes.$add({
-      active: 'active',
-      inactive: 'inactive'
-    });
+domConstants = require('./helpers/domConstants');
 
-    return classes;
-  }
+buildConstantsObject = function() {
+  var classes = domConstants.buildDomConstantsObject('.');
 
-  return {
-    buildConstantsObject: buildConstantsObject
-  };
-});
+  classes.$add({
+    active: 'active',
+    inactive: 'inactive'
+  });
+
+  return classes;
+};
+
+module.exports = buildConstantsObject;

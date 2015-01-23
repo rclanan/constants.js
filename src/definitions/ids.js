@@ -1,15 +1,15 @@
-define(['helpers/domConstants'], function(domConstants) {
-  'use strict';
+'use strict';
 
-  function buildDomConstantsObject() {
-    var ids = domConstants.buildDomConstantsObject('#');
+var domConstants, buildConstantsObject;
 
-    ids.$add({});
+domConstants = require('./helpers/domConstants');
 
-    return ids;
-  }
+buildConstantsObject = function() {
+  var ids = domConstants.buildDomConstantsObject('#');
 
-  return {
-    buildDomConstantsObject: buildDomConstantsObject
-  };
-});
+  ids.$add({});
+
+  return ids;
+};
+
+module.exports = buildConstantsObject;
