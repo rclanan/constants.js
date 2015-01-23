@@ -21,7 +21,7 @@ browserifyTask = function(callback, devMode) {
   browserifyThis = function(bundleConfig) {
     var browserifyLoader, bundle, reportFinished;
 
-    if(devMode) {
+    if (devMode) {
       _.extend(bundleConfig, watchify.args, { debug: true });
       bundleConfig = _.omit(bundleConfig, ['external', 'require']);
     }
@@ -36,8 +36,8 @@ browserifyTask = function(callback, devMode) {
         .pipe(buffer())
         .pipe(wrap({ src: './src/_start.js' }))
         .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(sourcemaps.write(bundleConfig.dest))
-        .pipe(gulp.dest('./'))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(bundleConfig.dest))
         .on('end', reportFinished)
         .pipe(browserSync.reload({stream:true}));
     };
