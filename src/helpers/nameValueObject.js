@@ -2,7 +2,7 @@
 
 var format, createNameValueObject, nameExistsError, valueExistsError;
 
-format = require('./helpers/format');
+format = require('./format');
 
 nameExistsError = 'name "{name}" is already in use, value is {value}';
 valueExistsError = 'given name {givenName} with a value of "{value}" already exists with a name of "{name}"';
