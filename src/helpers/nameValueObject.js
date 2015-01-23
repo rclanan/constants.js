@@ -1,88 +1,86 @@
-define(['helpers/format'], function(format) {
-  'use strict';
+'use strict';
 
-  var nameExistsError, valueExistsError;
+var format, createNameValueObject, nameExistsError, valueExistsError;
 
-  nameExistsError = 'name "{name}" is already in use, value is {value}';
-  valueExistsError = 'given name {givenName} with a value of "{value}" already exists with a name of "{name}"';
+format = require('./helpers/format');
 
-  function createNameValueObject(addErrors, valueKeyFunction) {
-    var nameValueObject, valueNameObject, getValueKey;
+nameExistsError = 'name "{name}" is already in use, value is {value}';
+valueExistsError = 'given name {givenName} with a value of "{value}" already exists with a name of "{name}"';
 
-    getValueKey = valueKeyFunction || function(nameValue) {
-      return nameValue.value;
-    };
+createNameValueObject = function(addErrors, valueKeyFunction) {
+  var nameValueObject, valueNameObject, getValueKey;
 
-    if (!addErrors) {
-      addErrors = {};
+  getValueKey = valueKeyFunction || function(nameValue) {
+    return nameValue.value;
+  };
+
+  if (!addErrors) {
+    addErrors = {};
+  }
+
+  addErrors.add = 'can not overwrite add';
+
+  nameValueObject = {};
+  valueNameObject = {};
+
+  function canAdd(nameValue) {
+    return !addErrors[nameValue.name] && !nameValueObject[nameValue.name] && !valueNameObject[nameValue.value];
+  }
+
+  function addNameValue(nameValue) {
+    nameValueObject[nameValue.name] = nameValue.value;
+    valueNameObject[getValueKey(nameValue)] = nameValue.name;
+  }
+
+  function buildAddErrorsError(nameValue) {
+    return new Error(addErrors[nameValue.name]);
+  }
+
+  function buildNameExistsError(nameValue) {
+    return new Error(format(nameExistsError, nameValue));
+  }
+
+  function buildValueExistsError(nameValue) {
+    return new Error(format(valueExistsError,
+                    {givenName: nameValue.name,
+                      name: valueNameObject[getValueKey(nameValue)],
+                      value: getValueKey(nameValue)
+                    }));
+  }
+
+  function throwRelevantError(nameValue) {
+    if (addErrors[nameValue.name]) {
+      throw buildAddErrorsError(nameValue);
     }
 
-    addErrors.add = 'can not overwrite add';
-
-    nameValueObject = {};
-    valueNameObject = {};
-
-    function canAdd(nameValue) {
-      return !addErrors[nameValue.name] && !nameValueObject[nameValue.name] && !valueNameObject[nameValue.value];
+    if (nameValueObject[nameValue.name]) {
+      throw buildNameExistsError(nameValue);
     }
 
-    function addNameValue(nameValue) {
-      nameValueObject[nameValue.name] = nameValue.value;
-      valueNameObject[getValueKey(nameValue)] = nameValue.name;
+    if (valueNameObject[nameValue.name]) {
+      throw buildValueExistsError(nameValue);
     }
+  }
 
-    function buildAddErrorsError(nameValue) {
-      return new Error(addErrors[nameValue.name]);
-    }
+  function add(nameValues) {
+    var name, nameValue;
 
-    function buildNameExistsError(nameValue) {
-      return new Error(format(nameExistsError, nameValue));
-    }
+    for (name in nameValues) {
+      nameValue = {name: name, value: nameValues[name]};
 
-    function buildValueExistsError(nameValue) {
-      return new Error(format(valueExistsError,
-                      {givenName: nameValue.name,
-                        name: valueNameObject[getValueKey(nameValue)],
-                        value: getValueKey(nameValue)
-                      }));
-    }
-
-    function throwRelevantError(nameValue) {
-      if (addErrors[nameValue.name]) {
-        throw buildAddErrorsError(nameValue);
-      }
-
-      if (nameValueObject[nameValue.name]) {
-        throw buildNameExistsError(nameValue);
-      }
-
-      if (valueNameObject[nameValue.name]) {
-        throw buildValueExistsError(nameValue);
-      }
-    }
-
-    function add(nameValues) {
-      var name, nameValue;
-
-      for (name in nameValues) {
-        nameValue = {name: name, value: nameValues[name]};
-
-        if (nameValues.hasOwnProperty(name)) {
-          if (canAdd(nameValue)) {
-            addNameValue({name: name, value: nameValues[name]});
-          } else {
-            throwRelevantError(nameValue);
-          }
+      if (nameValues.hasOwnProperty(name)) {
+        if (canAdd(nameValue)) {
+          addNameValue({name: name, value: nameValues[name]});
+        } else {
+          throwRelevantError(nameValue);
         }
       }
     }
-
-    nameValueObject.$add = add;
-
-    return nameValueObject;
   }
 
-  return {
-    createNameValueObject: createNameValueObject
-  };
-});
+  nameValueObject.$add = add;
+
+  return nameValueObject;
+};
+
+module.exports = createNameValueObject;
