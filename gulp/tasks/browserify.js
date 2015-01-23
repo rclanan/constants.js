@@ -1,6 +1,6 @@
 'use strict';
 
-var browserify, browserifyTask, browserSync, watchify, bundleLogger, gulp, handleErrors, source, buffer, sourcemaps, config, wrap, concat;
+var browserify, browserifyTask, browserSync, watchify, bundleLogger, gulp, handleErrors, source, buffer, sourcemaps, config, wrap;
 
 browserify = require('browserify');
 browserSync = require('browser-sync');
@@ -13,7 +13,6 @@ source = require('vinyl-source-stream');
 buffer = require('vinyl-buffer');
 config = require('../config').browserify;
 wrap = require('gulp-wrap');
-concat = require('gulp-concat');
 
 browserifyTask = function(callback, devMode) {
   var bundleQueue, browserifyThis;
@@ -35,7 +34,6 @@ browserifyTask = function(callback, devMode) {
         .on('error', handleErrors)
         .pipe(source(bundleConfig.outputName))
         .pipe(buffer())
-        .pipe(concat(bundleConfig.outputName))
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sourcemaps.write('./'))
         .pipe(wrap({ src: './src/_bundleTemplate.js' }))
