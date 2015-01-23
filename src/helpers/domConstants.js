@@ -2,7 +2,7 @@
 
 var nameValueObject, buildDomConstantsObject;
 
-nameValueObject = require('./helpers/nameValueObject');
+nameValueObject = require('./nameValueObject');
 
 buildDomConstantsObject = function(selectorSymbol) {
   var domConstant, superAdd, createDomValue;

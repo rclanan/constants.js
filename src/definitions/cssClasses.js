@@ -2,7 +2,7 @@
 
 var domConstants, buildConstantsObject;
 
-domConstants = require('./helpers/domConstants');
+domConstants = require('../helpers/domConstants');
 
 buildConstantsObject = function() {
   var classes = domConstants.buildDomConstantsObject('.');

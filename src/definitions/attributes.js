@@ -2,7 +2,7 @@
 
 var nameValueObject, buildConstantsObject;
 
-nameValueObject = require('./helpers/nameValueObject');
+nameValueObject = require('../helpers/nameValueObject');
 
 buildConstantsObject = function() {
     var attributes = nameValueObject.createNameValueObject();
