@@ -8,14 +8,17 @@ karma = require('karma').server;
 
 function getBaseConfiguration() {
   var karmaConfig = baseConfig.getConfiguration(config.karma.configFile);
+
   return karmaConfig;
 }
 
 function modifyConfig(configurationDefinition) {
   var i;
+
   for(i = 0; i < configurationDefinition.modifiers; i +=1) {
     configurationDefinition.baseConfig = configurationDefinition.modifiers[i].modifyConfiguration(configurationDefinition.baseConfig);
   }
+
   return configurationDefinition.baseConfig;
 }
 

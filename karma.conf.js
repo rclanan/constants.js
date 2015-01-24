@@ -8,8 +8,7 @@ module.exports = function(config) {
     // List of files or patterns to load in the browser
     files: [
     { pattern: 'src/**/*.js', included: false },
-    { pattern: 'test/spec/**/*.js', included: false },
-    'test/test-main.js'
+    { pattern: 'test/spec/**/*.js', included: true }
     ],
 
     // list of files to exclude
@@ -20,12 +19,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['coverage']
+      'src/**/*.js': ['browserify', 'coverage'],
+      'test/spec/**/*.js': ['browserify']
     },
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'browserify'],
+    frameworks: ['browserify', 'jasmine'],
 
     // Enable or disable watching files and executing the tests
     // whenever one of these files changes.
