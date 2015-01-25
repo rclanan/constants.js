@@ -11,5 +11,6 @@
   }
 }(this, function() {
   <%= contents %>
+
   return require('./constants');
 }));

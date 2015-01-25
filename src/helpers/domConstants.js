@@ -32,7 +32,7 @@ buildDomConstantsObject = function(selectorSymbol) {
 
     for (domName in nameValues) {
       if (nameValues.hasOwnProperty(domName)) {
-        valuesToAdd[domName] = createDomValue(nameValues[name]);
+        valuesToAdd[domName] = createDomValue(nameValues[domName]);
       }
     }
 
