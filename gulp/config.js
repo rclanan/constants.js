@@ -3,6 +3,7 @@ var dest, src, test;
 dest = './dist';
 src = './src';
 test = './test';
+reports = './reports';
 
 module.exports = {
   browserSync: {
