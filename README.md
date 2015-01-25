@@ -3,7 +3,7 @@
 
 constants handling library for JavaScript
 
-constants.js is designed to be used with [Require.js](http://requirejs.org)
+constants.js is designed to be used with [Common.js](http://www.commonjs.org/) and [Browserify](http://browserify.org/)
 
 This library is set up to help have a common place to declare constants and use between files, as well as help get rid of commonly repeated code related to these constants.
 
@@ -36,89 +36,92 @@ npm install
 Defining the constants file:
 
 ```javascript
-define([
-  'jQuery', // for finding and building elements
-  'constants' // constants library
-  ], function ($, constantsBuilder) {
-  'use strict';
+'use strict';
 
-  var constants = constantsBuilder.buildConstantsObject();
+var $, constantsBuilder, constants;
 
-  // This defines the IDS that are going to be used
-  constants.ids.$add({
-    listCreateName: 'listCreateName',
-    listCreateDescription: 'listCreateDescription',
-  });
+$ = require('jQuery'); // for finding and building elements
+constantsBuilder = require('constants'); // constants library
 
-  // Define the custom Classes we want to add
-  constants.classes.$add({
-    buttonPrimary: 'button-primary',
-    inputLabel: 'input-label',
-  });
+constants = constantsBuilder.buildConstantsObject();
 
-  // defining custom events
-  constants.events.$add({
-    nameChange: 'change:name',
-    typeChange: 'change:type',
-    descriptionChange: 'change:description'
-  });
-
-  // defining custom attributes, the base attributes for HTML should already exist.
-  constants.attributes.$add({
-    attributeId: 'attrid'
-  });
-
-  // defining localization values that we will be using
-  constants.localizations.$add({
-    description: 'DESCRIPTION',
-    detailListTypeStandard: 'DETAIL_LIST_TYPE_STANDARD',
-  });
-
-  // Here, we define what helper methods to call, this section helps to utilize
-  // existing libraries in use with our constants to help cut down on copy-pasta and
-  // long lines of code.
-
-  // this defines the localizations.getLocalizedValue() method.
-  // example call: constants.localizations.description.getLocalizedValue();
-  constants.localizations.$setGetLocalizedValueFunction(function(localizationValue){
-    return globalize.getLocalizedValue(localizationValue); // Make a call to some function that returns our localized value
-  });
-
-  // this defines the HTML element building function, here we are using JQuery, but any
-  // library can be used, what gets passed in is the HTML for the element.
-  // example call:
-  // var divEl = constants.tags.div.buildElement();
-  constants.tags.$setElementBuilderFunction(function(elementHtml){
-    return $(elementHtml);
-  });
-
-  // this defines the findElements function for constants.classes. this function should return
-  // all instances of the class.
-  // to be used (so, if the class was 'input-label', you would get passed '.input-label')
-  // example call:
-  // var inputLabel = constants.classes.inputLabel.findElements();
-  constants.classes.$setFindElementsFunction(function(selector){
-    return $(selector);
-  });
-
-  // this defines the findElements function for constants.ids. this function should return
-  // all instances of the ID.
-  // to be used (so, if the ID was 'listCreateName', you would get passed '#listCreateName')
-  // example call:
-  // var listCreateNameEl = constants.IDS.listCreateName.findElements();
-  constants.ids.$setFindElementsFunction(function(selector){
-    return $(selector);
-  });
-
-return constants;
+// This defines the IDS that are going to be used
+constants.ids.$add({
+  listCreateName: 'listCreateName',
+  listCreateDescription: 'listCreateDescription',
 });
+
+// Define the custom Classes we want to add
+constants.classes.$add({
+  buttonPrimary: 'button-primary',
+  inputLabel: 'input-label',
+});
+
+// defining custom events
+constants.events.$add({
+  nameChange: 'change:name',
+  typeChange: 'change:type',
+  descriptionChange: 'change:description'
+});
+
+// defining custom attributes, the base attributes for HTML should already exist.
+constants.attributes.$add({
+  attributeId: 'attrid'
+});
+
+// defining localization values that we will be using
+constants.localizations.$add({
+  description: 'DESCRIPTION',
+  detailListTypeStandard: 'DETAIL_LIST_TYPE_STANDARD',
+});
+
+// Here, we define what helper methods to call, this section helps to utilize
+// existing libraries in use with our constants to help cut down on copy-pasta and
+// long lines of code.
+
+// this defines the localizations.getLocalizedValue() method.
+// example call: constants.localizations.description.getLocalizedValue();
+constants.localizations.$setGetLocalizedValueFunction(function(localizationValue){
+  return globalize.getLocalizedValue(localizationValue); // Make a call to some function that returns our localized value
+});
+
+// this defines the HTML element building function, here we are using JQuery, but any
+// library can be used, what gets passed in is the HTML for the element.
+// example call:
+// var divEl = constants.tags.div.buildElement();
+constants.tags.$setElementBuilderFunction(function(elementHtml){
+  return $(elementHtml);
+});
+
+// this defines the findElements function for constants.classes. this function should return
+// all instances of the class.
+// to be used (so, if the class was 'input-label', you would get passed '.input-label')
+// example call:
+// var inputLabel = constants.classes.inputLabel.findElements();
+constants.classes.$setFindElementsFunction(function(selector){
+  return $(selector);
+});
+
+// this defines the findElements function for constants.ids. this function should return
+// all instances of the ID.
+// to be used (so, if the ID was 'listCreateName', you would get passed '#listCreateName')
+// example call:
+// var listCreateNameEl = constants.IDS.listCreateName.findElements();
+constants.ids.$setFindElementsFunction(function(selector){
+  return $(selector);
+});
+
+module.exports = { constants: constants };
 ```
 
 When using the defined constants file, the usage is also simple. If the file above was named "listContants.js", and was defined in Require to be "listContants" the usage would be like the following:
 
 ```javascript
-define(['listConstants'], function(listConstants){
-  var CLASSES, IDS, TAGS, LOCALS, EVENTS, ATTRIBUTES;
+  'use strict';
+
+  var listConstants, CLASSES, IDS, TAGS, LOCALS, EVENTS, ATTRIBUTES;
+
+  listConstants = require('./listConstants');
 
   CLASSES = listConstants.classes;
   ATTRIBUTES = listConstants.attributes;
@@ -151,7 +154,6 @@ define(['listConstants'], function(listConstants){
   var divName = TAGS.div.name; // returns 'div'
   var divHtml = TAGS.div.html; // returns '<div />'
   var divEl = TAGS.div.buildElement(); // returns a new div Element if correctly defined in listConstants.js
-});
 ```
 
 #### Predefined constants:
