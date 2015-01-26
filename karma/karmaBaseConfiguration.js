@@ -6,7 +6,8 @@
 function getConfiguration(configFileLocation) {
   return {
     configFile: configFileLocation,
-    singleRun: true
+    singleRun: true,
+    exclude: ['src/_*.js']
   };
 }
 

@@ -15,7 +15,7 @@ function getBaseConfiguration() {
 function modifyConfig(configurationDefinition) {
   var i;
 
-  for(i = 0; i < configurationDefinition.modifiers; i +=1) {
+  for(i = 0; i < configurationDefinition.modifiers.length; i +=1) {
     configurationDefinition.baseConfig = configurationDefinition.modifiers[i].modifyConfiguration(configurationDefinition.baseConfig);
   }
 
