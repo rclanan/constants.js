@@ -32,7 +32,11 @@ function buildTestRunner(modifiers) {
     modifiers: modifiers
   });
 
-  return function(done) { karma.start(karmaConfig, done); };
+  return function(done) {
+    console.log('starting Karma with following config: ');
+    console.log(karmaConfig);
+    karma.start(karmaConfig, done);
+  };
 }
 
 

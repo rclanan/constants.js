@@ -6,7 +6,7 @@ function modifyConfiguration(config){
     config.exclude = [];
   }
 
-  config.exclude.push(['test/spec/integration/**/*.js']);
+  config.exclude.push('test/spec/integration/**/*.js');
 
   return config;
 }

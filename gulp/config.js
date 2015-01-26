@@ -1,4 +1,6 @@
-var dest, src, test;
+var dest, src, test, reports, path;
+
+path = require('path');
 
 dest = './dist';
 src = './src';
@@ -26,6 +28,6 @@ module.exports = {
     dest: dest
   },
   karma: {
-    configFile: __dirname + '/../karma.conf.js'
+    configFile: __dirname + '/../karma.conf.js'//baseDirectory + '/../karma.conf.js'
   }
 };
