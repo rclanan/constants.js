@@ -10,7 +10,7 @@
     window.constants = factory();
   }
 }(this, function() {
-  <%= contents %>
+  var require = <%= contents %>;
 
-  return require('./constants');
+  return require(1);
 }));

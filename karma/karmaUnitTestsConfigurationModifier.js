@@ -1,6 +1,6 @@
 'use strict';
 
-function modifyConfiguration(config){
+function modifyConfiguration(config) {
 
   if(config.exclude === undefined) {
     config.exclude = [];

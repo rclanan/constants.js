@@ -4,6 +4,8 @@ var constantsBuilder, constants, TAGS;
 
 constantsBuilder = require('../dist/constants.js');
 
+console.log(constantsBuilder);
+
 constants = constantsBuilder.buildConstantsObject();
 
 TAGS = constants.tags;
