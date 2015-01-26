@@ -9,7 +9,6 @@ function modifyConfiguration(baseConfiguration){
   baseConfiguration.singleRun = false;
   baseConfiguration.flags.push('-- debug');
   baseConfiguration.browsers = ['Chrome'];
-  baseConfiguration.preprocessors = {};
 
   return baseConfiguration;
 }
