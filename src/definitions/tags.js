@@ -14,7 +14,7 @@ buildConstantsObject = function() {
       html: html,
       name: tagName,
       buildElement: function() {
-        return tags.$elementBuilder(html); // TODO: Set this to a generic or empty function, if it's not overridden then the call will fail as it doesn't see the function at all
+        return tags.$elementBuilder(html);
       }
     };
   }
