@@ -9,7 +9,6 @@ tags = require('./definitions/tags');
 events = require('./definitions/events');
 localizations = require('./definitions/localizations');
 
-
 buildConstantsObject = function() {
     return {
       classes: cssClasses.buildConstantsObject(),

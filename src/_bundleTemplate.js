@@ -10,7 +10,13 @@
     window.constants = factory();
   }
 }(this, function() {
-  var require = <%= contents %>;
+  var require, itemToExport;
 
-  return require(1);
+  // this is the what is defined in browserify's "entry" item in the configBundles array.
+  // located in gulp/config.js under "browserify"
+  itemToExport = 1;
+
+  require = <%= contents %>;
+
+  return require(itemToExport);
 }));
