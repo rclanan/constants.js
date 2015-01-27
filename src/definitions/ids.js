@@ -2,10 +2,13 @@
 
 var domConstants, buildConstantsObject;
 
-domConstants = require('../helpers/domConstants');
+domConstants = require('./../helpers/domConstants');
 
 buildConstantsObject = function() {
-  var ids = domConstants.buildDomConstantsObject('#');
+  var ids = domConstants.buildDomConstantsObject({
+    constantsObjectName: 'ids',
+    selectorSymbol: '#'
+  });
 
   ids.$add({});
 

@@ -5,7 +5,9 @@ var nameValueObject, buildConstantsObject;
 nameValueObject = require('../helpers/nameValueObject');
 
 buildConstantsObject = function() {
-    var attributes = nameValueObject.createNameValueObject();
+    var attributes = nameValueObject.createNameValueObject({
+      constantsObjectName: 'attributes'
+    });
 
     attributes.$add({
       accesskey: 'accesskey',

@@ -5,7 +5,9 @@ var nameValueObject, buildConstantsObject;
 nameValueObject = require('../helpers/nameValueObject');
 
 buildConstantsObject = function() {
-  var events = nameValueObject.createNameValueObject();
+  var events = nameValueObject.createNameValueObject({
+    constantsObjectName: 'events'
+  });
 
   events.$add({
     click: 'click',

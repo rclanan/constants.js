@@ -5,7 +5,10 @@ var domConstants, buildConstantsObject;
 domConstants = require('../helpers/domConstants');
 
 buildConstantsObject = function() {
-  var classes = domConstants.buildDomConstantsObject('.');
+  var classes = domConstants.buildDomConstantsObject({
+    constantsObjectName: 'cssClasses',
+    selectorSymbol: '.'
+  });
 
   classes.$add({
     active: 'active',

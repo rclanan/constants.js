@@ -4,47 +4,61 @@ var nameValueObject, buildConstantsObject;
 
 nameValueObject = require('../helpers/nameValueObject');
 
-buildConstantsObject = function() {
-  var localization, superAdd;
+function buildLocalizationValue(localizationValue, baseConstantsObject) {
+  return {
+    name: localizationValue,
+    getLocalizedValue: function() { return baseConstantsObject.$getLocalizedValue(localizationValue); }
+  };
+}
 
-  // instead of linking the function directly, we link a function that calls the function, this allows us
-  // to change or set getLocalizedValue at a later time after adding the localization value.
-  function buildLocalizationValue(localizationValue) {
-    return {
-      name: localizationValue,
-      getLocalizedValue: function() { return localization.$getLocalizedValue(localizationValue); }
-    };
-  }
+function extendAddFunction(baseConstantsObject) {
+  var superAdd;
 
-  localization = nameValueObject.createNameValueObject({}, function(nameValue) {
-    return nameValue.value.name;
-  });
+  superAdd = baseConstantsObject.$add;
 
-  superAdd = localization.$add;
-
-  localization.$add = function(nameValues) {
+  baseConstantsObject.$add = function(nameValues) {
     var givenValues, localizationName;
 
     givenValues = {};
 
     for (localizationName in nameValues) {
       if (nameValues.hasOwnProperty(localizationName)) {
-        givenValues[localizationName] = buildLocalizationValue(nameValues[localizationName]);
+        givenValues[localizationName] = buildLocalizationValue(nameValues[localizationName], baseConstantsObject);
       }
     }
 
     superAdd(givenValues);
   };
+}
 
-  localization.$setGetLocalizedValueFunction = function(getLocalizedValue) {
-    localization.$getLocalizedValue = getLocalizedValue;
+buildConstantsObject = function() {
+  var localizations;
+
+  // instead of linking the function directly, we link a function that calls the function, this allows us
+  // to change or set getLocalizedValue at a later time after adding the localization value.
+
+
+  localizations = nameValueObject.createNameValueObject({
+    constantsObjectName: 'localizations',
+    reservedWords: ['$setGetLocalizedValueFunction', '$getLocalizedValue'],
+    valueKeyFunction: function(nameValue) {
+        return nameValue.value.name;
+      }
+  });
+
+  localizations.$setGetLocalizedValueFunction = function(getLocalizedValue) {
+    localizations.$getLocalizedValue = getLocalizedValue;
   };
 
-  localization.$add({});
+  extendAddFunction(localizations);
 
-  return localization;
+  localizations.$add({});
+
+  return localizations;
 };
 
 module.exports = {
-  buildConstantsObject:buildConstantsObject
+  buildConstantsObject: buildConstantsObject,
+  buildLocalizationValue: buildLocalizationValue,
+  extendAddFunction: extendAddFunction
 };

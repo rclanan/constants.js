@@ -4,28 +4,23 @@ var nameValueObject, buildConstantsObject;
 
 nameValueObject = require('../helpers/nameValueObject');
 
-buildConstantsObject = function() {
-  var tags, superAdd;
+function buildHtmlTagValue(tagName, baseConstantsObject) {
+  var html = '<' + tagName + ' />';
 
-  function buildHtmlTagValue(tagName) {
-    var html = '<' + tagName + ' />';
+  return {
+    html: html,
+    name: tagName,
+    buildElement: function() {
+      return baseConstantsObject.$elementBuilder(html); // TODO: Set this to a generic or empty function, if it's not overridden then the call will fail as it doesn't see the function at all
+    }
+  };
+}
 
-    return {
-      html: html,
-      name: tagName,
-      buildElement: function() {
-        return tags.$elementBuilder(html); // TODO: Set this to a generic or empty function, if it's not overridden then the call will fail as it doesn't see the function at all
-      }
-    };
-  }
+function extendAddFunction(baseConstantsObject) {
+  var superAdd;
+  superAdd = baseConstantsObject.$add;
 
-  tags = nameValueObject.createNameValueObject({}, function(nameValue) {
-    return nameValue.value.name;
-  });
-
-  superAdd = tags.$add;
-
-  tags.$add = function(nameValues) {
+  baseConstantsObject.$add = function(nameValues) {
     // we should be able to simply add the name, img, div, span, then make a tag out of it.
     var givenValues, tagName;
 
@@ -34,16 +29,31 @@ buildConstantsObject = function() {
 
     for (tagName in nameValues) {
       if (nameValues.hasOwnProperty(tagName)) {
-        givenValues[tagName] = buildHtmlTagValue(nameValues[tagName]);
+        givenValues[tagName] = buildHtmlTagValue(nameValues[tagName], baseConstantsObject);
       }
     }
 
     superAdd(givenValues);
   };
 
+}
+
+buildConstantsObject = function() {
+  var tags;
+
+  tags = nameValueObject.createNameValueObject({
+    constantsObjectName: 'tags',
+    reservedWords: ['$elementBuilder', '$setElementBuilderFunction'],
+    valueKeyFunction: function(nameValue) {
+      return nameValue.value.name;
+    }
+  });
+
   tags.$setElementBuilderFunction = function(elementBuilder) {
     tags.$elementBuilder = elementBuilder;
   };
+
+  extendAddFunction(tags);
 
   tags.$add({
     anchor: 'a',
@@ -164,5 +174,7 @@ buildConstantsObject = function() {
 };
 
 module.exports = {
-  buildConstantsObject:buildConstantsObject
+  buildConstantsObject: buildConstantsObject,
+  extendAddFunction: extendAddFunction,
+  buildHtmlTagValue: buildHtmlTagValue
 };

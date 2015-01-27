@@ -4,40 +4,62 @@ var nameValueObject, buildDomConstantsObject;
 
 nameValueObject = require('./nameValueObject');
 
-buildDomConstantsObject = function(selectorSymbol) {
-  var domConstant, superAdd, createDomValue;
+function buildConstantsObject(domConstantsDefinition) {
+  var domConstants, reservedWords;
 
-  domConstant = nameValueObject.createNameValueObject({}, function(nameValue) {
-    return nameValue.value.name;
+  reservedWords = domConstantsDefinition.reservedWorlds ? domConstantsDefinition.reservedWorlds : [];
+  reservedWords.push('$setFindElementsFunction');
+
+  domConstants = nameValueObject.createNameValueObject({
+    reservedWords: reservedWords,
+    constantsObjectName: domConstantsDefinition.constantsObjectName,
+    valueKeyFunction: function(nameValue) {
+      return nameValue.value.name;
+    }
   });
 
-  superAdd = domConstant.$add;
+  return domConstants;
+}
 
-  createDomValue = function(domValue) {
-    var selector = selectorSymbol + domValue;
+function createDomValue(domValue, domConstants, selectorSymbol){
+  var selector = selectorSymbol + domValue;
 
-    return {
-      name: domValue,
-      selector: selector,
-      findElements: function() {
-        return domConstant.$findElements(selector);
-      }
-    };
+  return {
+    name: domValue,
+    selector: selector,
+    findElements: function() {
+      return domConstants.$findElements(selector);
+    }
   };
+}
 
-  domConstant.$add = function(nameValues) {
+function extendAddFunction(addDefinition) {
+  var superAdd = addDefinition.constantsBase.$add;
+
+  addDefinition.constantsBase.$add = function(nameValues) {
     var domName, valuesToAdd;
 
     valuesToAdd = {};
 
     for (domName in nameValues) {
       if (nameValues.hasOwnProperty(domName)) {
-        valuesToAdd[domName] = createDomValue(nameValues[domName]);
+        valuesToAdd[domName] = createDomValue(nameValues[domName], addDefinition.constantsBase, addDefinition.selectorSymbol);
       }
     }
 
     superAdd(valuesToAdd);
   };
+}
+
+buildDomConstantsObject = function(domConstantsDefinition) {
+  var domConstant;
+
+  domConstant = buildConstantsObject(domConstantsDefinition);
+
+  extendAddFunction({
+    selectorSymbol: domConstantsDefinition.selectorSymbol,
+    constantsBase: domConstant
+  });
 
   domConstant.$setFindElementsFunction = function(findElements) {
     domConstant.$findElements = findElements;
@@ -47,5 +69,7 @@ buildDomConstantsObject = function(selectorSymbol) {
 };
 
 module.exports = {
-  buildDomConstantsObject: buildDomConstantsObject
+  buildDomConstantsObject: buildDomConstantsObject,
+  extendAddFunction: extendAddFunction,
+  createDomValue: createDomValue
 };
