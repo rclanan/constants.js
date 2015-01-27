@@ -7,10 +7,10 @@ jshint = require('gulp-jshint');
 handleErrors = require('../util/handleErrors');
 config = require('../config');
 
-lintTask = function() {
-  return gulp.src([config.src + '/**/*.js', '!' + config.src + '/_*.js'])
-  .pipe(jshint('.jshintrc'))
-  .pipe(jshint.reporter('jshint-stylish'))
+lintTask = function(done) {
+  return gulp.src(config.src + '/constants.js')
+  .pipe(jshint())
+  .pipe(jshint.reporter('default'), done)
   .on('error', handleErrors);
 };
 
