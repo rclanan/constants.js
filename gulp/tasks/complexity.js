@@ -5,10 +5,10 @@ var gulp, complexity, handleErrors, config, complexityTask;
 gulp = require('gulp');
 complexity = require('gulp-complexity');
 handleErrors = require('../util/handleErrors');
-config = require('../config');
+config = require('../config').complexity;
 
 complexityTask = function() {
-  return gulp.src([config.src + '/**/*.js', '!' + config.src + '/_*.js'])
+  return gulp.src(config.files)
   .pipe(complexity())
   .on('error', handleErrors);
 };

@@ -19,7 +19,7 @@ buildConstantsObject = function() {
       events: events.buildConstantsObject(),
       localizations: localizations.buildConstantsObject()
     };
-};;
+};
 
 module.exports = {
   buildConstantsObject: buildConstantsObject

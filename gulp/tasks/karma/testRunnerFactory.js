@@ -3,11 +3,11 @@
 var baseConfig, config, karma;
 
 baseConfig = require('../../../karma/karmaBaseConfiguration');
-config = require('../../config');
+config = require('../../config').karma;
 karma = require('karma').server;
 
 function getBaseConfiguration() {
-  var karmaConfig = baseConfig.getConfiguration(config.karma.configFile);
+  var karmaConfig = baseConfig.getConfiguration(config.configFile);
 
   return karmaConfig;
 }

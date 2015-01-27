@@ -5,12 +5,14 @@ var gulp, jshint, handleErrors, config, lintTask;
 gulp = require('gulp');
 jshint = require('gulp-jshint');
 handleErrors = require('../util/handleErrors');
-config = require('../config');
+config = require('../config').linter;
 
-lintTask = function(done) {
-  return gulp.src(config.src + '/constants.js')
-  .pipe(jshint())
-  .pipe(jshint.reporter('default'), done)
+console.log(config.src);
+lintTask = function() {
+  return gulp.src(config.files)
+  .pipe(jshint('.jshintrc'))
+  .pipe(jshint.reporter('jshint-stylish'))
+  .pipe(jshint.reporter('fail'))
   .on('error', handleErrors);
 };
 

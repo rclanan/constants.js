@@ -4,7 +4,7 @@ var gulp,del, config, cleanReportsTask;
 
 gulp = require('gulp');
 del = require('del');
-config = require('../../config');
+config = require('../../config').cleaning;
 
 cleanReportsTask = function(done) {
   del([config.reports + '/**'], done);
