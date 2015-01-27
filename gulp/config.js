@@ -18,16 +18,27 @@ module.exports = {
     bundleConfigs: [{
       entries: src + '/constants.js',
       dest: dest,
+      template: src + '/_bundleTemplate.js',
       outputName: 'constants.js',
       require: [],
       external: []
     }]
   },
   production: {
-    jsSrc: dest + '/*.js',
+    jsSrc: dest + '/constants.js',
     dest: dest
   },
   karma: {
-    configFile: __dirname + '/../karma.conf.js'//baseDirectory + '/../karma.conf.js'
+    configFile: __dirname + '/../karma.conf.js'
+  },
+  linter: {
+    files: [ src + '/**/*.js', '!'  + src + '/**/_*.js']
+  },
+  complexity: {
+    files: [ src + '/**/*.js', '!'  + src + '/**/_*.js']
+  },
+  cleaning: {
+    dist: dest,
+    reports: reports
   }
 };

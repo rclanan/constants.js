@@ -36,7 +36,7 @@ browserifyTask = function(callback, devMode) {
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sourcemaps.write('./'))
-        .pipe(wrap({ src: './src/_bundleTemplate.js' }))
+        .pipe(wrap({ src: bundleConfig.template }))
         .pipe(gulp.dest(bundleConfig.dest))
         .on('end', reportFinished)
         .pipe(browserSync.reload({stream:true}));
