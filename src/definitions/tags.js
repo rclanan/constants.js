@@ -11,7 +11,7 @@ function buildHtmlTagValue(tagName, baseConstantsObject) {
     html: html,
     name: tagName,
     buildElement: function() {
-      return baseConstantsObject.$elementBuilder(html); // TODO: Set this to a generic or empty function, if it's not overridden then the call will fail as it doesn't see the function at all
+      return baseConstantsObject.$elementBuilder(html);
     }
   };
 }
@@ -38,23 +38,7 @@ function extendAddFunction(baseConstantsObject) {
 
 }
 
-buildConstantsObject = function() {
-  var tags;
-
-  tags = nameValueObject.createNameValueObject({
-    constantsObjectName: 'tags',
-    reservedWords: ['$elementBuilder', '$setElementBuilderFunction'],
-    valueKeyFunction: function(nameValue) {
-      return nameValue.value.name;
-    }
-  });
-
-  tags.$setElementBuilderFunction = function(elementBuilder) {
-    tags.$elementBuilder = elementBuilder;
-  };
-
-  extendAddFunction(tags);
-
+function addHtmlTags(tags){
   tags.$add({
     anchor: 'a',
     abbr: 'abbr',
@@ -169,6 +153,26 @@ buildConstantsObject = function() {
     video: 'video',
     wbr: 'wbr'
   });
+}
+
+buildConstantsObject = function() {
+  var tags;
+
+  tags = nameValueObject.createNameValueObject({
+    constantsObjectName: 'tags',
+    reservedWords: ['$elementBuilder', '$setElementBuilderFunction'],
+    valueKeyFunction: function(nameValue) {
+      return nameValue.value.name;
+    }
+  });
+
+  tags.$setElementBuilderFunction = function(elementBuilder) {
+    tags.$elementBuilder = elementBuilder;
+  };
+
+  extendAddFunction(tags);
+
+  addHtmlTags(tags);
 
   return tags;
 };
@@ -176,5 +180,6 @@ buildConstantsObject = function() {
 module.exports = {
   buildConstantsObject: buildConstantsObject,
   extendAddFunction: extendAddFunction,
-  buildHtmlTagValue: buildHtmlTagValue
+  buildHtmlTagValue: buildHtmlTagValue,
+  addHtmlTags: addHtmlTags
 };

@@ -2,7 +2,7 @@
 
 var nameExistsErrorDefinitionFactory, valueExistsErrorDefinitionFactory, reservedNameErrorDefinitionFactory;
 
-nameExistsErrorDefinitionFactory = require('./nameValueErrors/nameExistsDefinitionFactory');
+nameExistsErrorDefinitionFactory = require('./nameValueErrors/nameExistsErrorDefinitionFactory');
 valueExistsErrorDefinitionFactory = require('./nameValueErrors/valueExistsErrorDefinitionFactory');
 reservedNameErrorDefinitionFactory = require('./nameValueErrors/reservedNameErrorDefinitionFactory');
 
