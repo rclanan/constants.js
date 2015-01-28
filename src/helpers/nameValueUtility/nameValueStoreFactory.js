@@ -29,7 +29,7 @@ function add(nameValues, nameValueStore) {
 }
 
 function addNameBaseValueErrorHandling(nameValueErrorHandlingDefinition) {
-  nameValueErrorHandling.addNameValueErrorHandling({
+  nameValueErrorHandling.addNameValueObjectErrorHandling({
     nameValueStore: nameValueErrorHandlingDefinition.store,
     constantsObjectName: nameValueErrorHandlingDefinition.constantsObjectName,
     errorHandling: nameValueErrorHandlingDefinition.errorHandling
@@ -64,7 +64,7 @@ function buildNameValueStore(nameValueStoreDefinition) {
 
   nameValueStore = {
     add: function(nameValues) { add(nameValues, storeBase); },
-    nameValueStore: storeBase
+    data: storeBase,
   };
 
   Object.defineProperty(nameValueStore,
@@ -73,6 +73,14 @@ function buildNameValueStore(nameValueStoreDefinition) {
       enumerable: false,
       configurable: false,
       get: function() { return storeBase.errorHandling; }
+    });
+
+  Object.defineProperty(nameValueStore,
+    'addReservedName',
+    {
+      enumerable: false,
+      configurable: false,
+      get: function() { return storeBase.errorHandling.addReservedName; }
     });
 
   return nameValueStore;

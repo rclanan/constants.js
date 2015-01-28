@@ -1,7 +1,7 @@
 'use strict';
 
 function buildNameValueObject(nameValueStore) {
-  var nameValueObject = Object.create(nameValueStore.nameValueMap);
+  var nameValueObject = Object.create(nameValueStore.data.nameValueMap);
   nameValueObject.$add = nameValueStore.add;
 
   return nameValueObject;

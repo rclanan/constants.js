@@ -10,10 +10,10 @@ reservedNameErrorDefinitionFactory = require('./nameValueErrors/reservedNameErro
 function addNameValueObjectErrorHandling(nameValueObjectDefinition) {
   var errorHandling = nameValueObjectDefinition.errorHandling;
 
-  var reservedNameErrorDefinition = reservedNameErrorDefinitionFactory(nameValueObjectDefinition.constantsObjectName);
+  var reservedNameErrorDefinition = reservedNameErrorDefinitionFactory.buildErrorDefinition(nameValueObjectDefinition.constantsObjectName);
 
-  errorHandling.addErrorDefinition(nameExistsErrorDefinitionFactory(nameValueObjectDefinition.nameValueStore));
-  errorHandling.addErrorDefinition(valueExistsErrorDefinitionFactory(nameValueObjectDefinition.nameValueStore));
+  errorHandling.addErrorDefinition(nameExistsErrorDefinitionFactory.buildErrorDefinition(nameValueObjectDefinition.nameValueStore));
+  errorHandling.addErrorDefinition(valueExistsErrorDefinitionFactory.buildErrorDefinition(nameValueObjectDefinition.nameValueStore));
   errorHandling.addErrorDefinition(reservedNameErrorDefinition);
 
   errorHandling.addReservedName = reservedNameErrorDefinition.addReservedName;
