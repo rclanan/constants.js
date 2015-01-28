@@ -83,5 +83,5 @@ module.exports = {
   buildStoreBase: buildStoreBase,
   add: add,
   addNameValue: addNameValue,
-  addNameBaseValueErrorHandling
+  addNameBaseValueErrorHandling: addNameBaseValueErrorHandling
 };
