@@ -1,8 +1,10 @@
 'use strict';
 
-var proxyquire;
+var proxyquire, path, testModuleLocation;
 
 proxyquire = require('proxyquireify')(require);
+
+path = require('path');
 
 //var nameValueObject = require('../../../src/helpers/nameValueObject');
 
@@ -19,6 +21,8 @@ nameValueObjectDefinition.reservedWords.forEach(nameValueStore.addReservedName);
 
 return nameValueObjectFactory.buildNameValueObject(nameValueStore);
  */
+
+testModuleLocation = path.resolve(__dirname, '../../../src/helpers/nameValueObject')
 
 function buildNameValueStoreFactoryMock() {
   var callIdCount, callResults, stub;
@@ -135,7 +139,7 @@ describe('nameValueObject Unit Test', function() {
     mockContainer = buildMocks();
     testResults = mockContainer.results;
 
-    nameValueObject = proxyquire('../../../src/helpers/nameValueObject', mockContainer.stubs);
+    nameValueObject = proxyquire(testModuleLocation, mockContainer.stubs);
     testResults.returnedNameValueObject = nameValueObject.createNameValueObject(valuesPassedIn);
   });
 
