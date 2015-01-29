@@ -29,7 +29,12 @@ module.exports = {
     dest: dest
   },
   karma: {
-    configFile: __dirname + '/../karma.conf.js'
+    configFile: __dirname + '/../karma.conf.js',
+    //Browserify plugins
+    browserify: {
+      debug: true,
+      plugin: ['proxyquire-universal']
+    },
   },
   linter: {
     files: [ src + '/**/*.js', '!'  + src + '/**/_*.js']

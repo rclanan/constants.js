@@ -1,6 +1,6 @@
 'use strict';
 
-var browserify, browserifyTask, browserSync, watchify, bundleLogger, gulp, handleErrors, source, buffer, sourcemaps, config, wrap;
+var browserify, mockify, browserifyTask, browserSync, watchify, bundleLogger, gulp, handleErrors, source, buffer, sourcemaps, config, wrap;
 
 browserify = require('browserify');
 browserSync = require('browser-sync');
@@ -27,6 +27,8 @@ browserifyTask = function(callback, devMode) {
     }
 
     browserifyLoader = browserify(bundleConfig);
+
+
     bundle = function() {
       bundleLogger.start(bundleConfig.outputName);
 
@@ -43,6 +45,7 @@ browserifyTask = function(callback, devMode) {
     };
 
     if (devMode) {
+
       browserifyLoader = watchify(browserifyLoader);
       browserifyLoader.on('update', bundle);
       bundleLogger.watch(bundleConfig.outputName);

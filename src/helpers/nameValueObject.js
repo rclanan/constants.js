@@ -19,7 +19,7 @@ createNameValueObject = function( nameValueObjectDefinition) {
     getValueKey: getValueKey
   });
 
-  nameValueObjectDefinition.reservedWords.forEach(nameValueStore.addReservedName);
+  nameValueObjectDefinition.reservedNames.forEach(nameValueStore.addReservedName);
 
   return nameValueObjectFactory.buildNameValueObject(nameValueStore);
 };

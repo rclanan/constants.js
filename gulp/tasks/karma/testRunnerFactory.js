@@ -7,7 +7,7 @@ config = require('../../config').karma;
 karma = require('karma').server;
 
 function getBaseConfiguration() {
-  var karmaConfig = baseConfig.getConfiguration(config.configFile);
+  var karmaConfig = baseConfig.getConfiguration(config);
 
   return karmaConfig;
 }

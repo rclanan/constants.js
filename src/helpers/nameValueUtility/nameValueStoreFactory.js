@@ -64,7 +64,7 @@ function buildNameValueStore(nameValueStoreDefinition) {
 
   nameValueStore = {
     add: function(nameValues) { add(nameValues, storeBase); },
-    data: storeBase,
+    data: storeBase
   };
 
   Object.defineProperty(nameValueStore,
