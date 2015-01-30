@@ -3,34 +3,36 @@
 var errorHandlingFactory, nameValueErrorHandling;
 
 errorHandlingFactory = require('./errorHandlingFactory');
-nameValueErrorHandling = require('./nameValueErrorHandling');
+nameValueErrorHandling = require('./constantsDictionaryErrorHandling');
 
-function addNameValue(nameValue, nameValueStore) {
+// consider breaking this out. it may be too complex and do too many things.
+
+function addNameValue(nameValue, constantsStore) {
   var nameValueMap, valueNameMap;
 
-  nameValueMap = nameValueStore.nameValueMap;
-  valueNameMap = nameValueStore.valueNameMap;
+  nameValueMap = constantsStore.nameValueMap;
+  valueNameMap = constantsStore.valueNameMap;
 
   nameValueMap[nameValue.name] = nameValue.value;
-  valueNameMap[nameValueStore.getValueKey(nameValue)] = nameValue.name;
+  valueNameMap[constantsStore.getValueKey(nameValue)] = nameValue.name;
 }
 
-function add(nameValues, nameValueStore) {
+function add(nameValues, constantsStore) {
   var name, nameValue;
 
   for (name in nameValues) {
     nameValue = {name: name, value: nameValues[name]};
 
     if (nameValues.hasOwnProperty(name)) {
-      nameValueStore.errorHandling.throwRelevantError(nameValue);
-      addNameValue({name: name, value: nameValues[name]}, nameValueStore);
+      constantsStore.errorHandling.throwRelevantError(nameValue);
+      addNameValue({name: name, value: nameValues[name]}, constantsStore);
     }
   }
 }
 
 function addNameBaseValueErrorHandling(nameValueErrorHandlingDefinition) {
   nameValueErrorHandling.addNameValueObjectErrorHandling({
-    nameValueStore: nameValueErrorHandlingDefinition.store,
+    constantsStore: nameValueErrorHandlingDefinition.store,
     constantsObjectName: nameValueErrorHandlingDefinition.constantsObjectName,
     errorHandling: nameValueErrorHandlingDefinition.errorHandling
   });
@@ -57,17 +59,17 @@ function buildStoreBase(nameValueStoreDefinition) {
   return storeBase;
 }
 
-function buildNameValueStore(nameValueStoreDefinition) {
-  var storeBase, nameValueStore;
+function buildConstantsStore(options) {
+  var storeBase, constantsStore;
 
-  storeBase = buildStoreBase(nameValueStoreDefinition);
+  storeBase = buildStoreBase(options);
 
-  nameValueStore = {
+  constantsStore = {
     add: function(nameValues) { add(nameValues, storeBase); },
     data: storeBase
   };
 
-  Object.defineProperty(nameValueStore,
+  Object.defineProperty(constantsStore,
     'errorHandling',
     {
       enumerable: false,
@@ -75,7 +77,7 @@ function buildNameValueStore(nameValueStoreDefinition) {
       get: function() { return storeBase.errorHandling; }
     });
 
-  Object.defineProperty(nameValueStore,
+  Object.defineProperty(constantsStore,
     'addReservedName',
     {
       enumerable: false,
@@ -83,11 +85,11 @@ function buildNameValueStore(nameValueStoreDefinition) {
       get: function() { return storeBase.errorHandling.addReservedName; }
     });
 
-  return nameValueStore;
+  return constantsStore;
 }
 
 module.exports = {
-  buildNameValueStore: buildNameValueStore,
+  build: buildConstantsStore,
   buildStoreBase: buildStoreBase,
   add: add,
   addNameValue: addNameValue,

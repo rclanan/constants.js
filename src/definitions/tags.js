@@ -2,7 +2,7 @@
 
 var nameValueObject, buildConstantsObject;
 
-nameValueObject = require('../helpers/nameValueObject');
+nameValueObject = require('../helpers/constantsDictionary');
 
 function buildHtmlTagValue(tagName, baseConstantsObject) {
   var html = '<' + tagName + ' />';

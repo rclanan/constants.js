@@ -1,10 +1,11 @@
 'use strict';
 
-var baseConfig, config, karma;
+var baseConfig, config, karma,path;
 
 baseConfig = require('../../../karma/karmaBaseConfiguration');
 config = require('../../config').karma;
 karma = require('karma').server;
+path = require('path');
 
 function getBaseConfiguration() {
   var karmaConfig = baseConfig.getConfiguration(config);
@@ -33,8 +34,11 @@ function buildTestRunner(modifiers) {
   });
 
   return function(done) {
-    console.log('starting Karma with following config: ');
-    console.log(karmaConfig);
+
+    process.env.NODE_PATH = path.normalize(path.join(
+      __dirname, '../../../node_modules/')) + ':' +
+      path.normalize(path.join(__dirname, '../../../src/'));
+
     karma.start(karmaConfig, done);
   };
 }
