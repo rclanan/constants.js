@@ -1,9 +1,9 @@
 'use strict';
 
-var errorHandlingFactory, nameValueErrorHandling;
+var errorHandlingFactory, constantsDictionaryErrorHandling;
 
 errorHandlingFactory = require('./errorHandlingFactory');
-nameValueErrorHandling = require('./constantsDictionaryErrorHandling');
+constantsDictionaryErrorHandling = require('./constantsDictionaryErrorHandling');
 
 // consider breaking this out. it may be too complex and do too many things.
 
@@ -30,14 +30,14 @@ function add(nameValues, constantsStore) {
   }
 }
 
-function addNameBaseValueErrorHandling(nameValueErrorHandlingDefinition) {
-  nameValueErrorHandling.addNameValueObjectErrorHandling({
-    constantsStore: nameValueErrorHandlingDefinition.store,
-    constantsObjectName: nameValueErrorHandlingDefinition.constantsObjectName,
-    errorHandling: nameValueErrorHandlingDefinition.errorHandling
+function addNameBaseValueErrorHandling(options) {
+  constantsDictionaryErrorHandling.addErrorHandling({
+    constantsStore: options.store,
+    constantsObjectName: options.constantsObjectName,
+    errorHandling: options.errorHandling
   });
 
-  nameValueErrorHandlingDefinition.errorHandling.addReservedName('$add');
+  options.errorHandling.addReservedName('$add');
 }
 
 function buildStoreBase(nameValueStoreDefinition) {

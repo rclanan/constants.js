@@ -6,31 +6,30 @@ stringFormatter = require('../../stringFormatter');
 valueExistsErrorText = 'given name {givenName} with a value of "{value}" already exists with a name of "{name}"';
 
 
-function buildValueExistsError(nameValue, nameValueStore) {
+function buildValueExistsError(nameValue, constantsStore) {
   var errorText = stringFormatter.format(valueExistsErrorText,
     {
       givenName: nameValue.name,
-      name: nameValueStore.valueNameObject[nameValueStore.getValueKey(nameValue)],
-      value: nameValueStore.getValueKey(nameValue)
+      name: constantsStore.valueNameMap[constantsStore.getValueKey(nameValue)],
+      value: constantsStore.getValueKey(nameValue)
     });
 
   return new Error(errorText);
 }
 
 
-function valueExistsErrorCondition(nameValue, nameValueStore) {
-  return !!nameValueStore.valueNameMap[nameValue.name];
+function valueExistsErrorCondition(nameValue, constantsStore) {
+  return !!constantsStore.valueNameMap[nameValue.value];
 }
 
-function buildValueExistsErrorDefinition (nameValueStore) {
+function buildValueExistsErrorDefinition (constantsStore) {
   return {
-    errorCondition: function(nameValue) { return valueExistsErrorCondition(nameValue, nameValueStore); },
-    errorBuilder: function(nameValue) { return buildValueExistsError(nameValue, nameValueStore); }
+    errorName: 'valueExists',
+    errorCondition: function(nameValue) { return valueExistsErrorCondition(nameValue, constantsStore); },
+    errorBuilder: function(nameValue) { return buildValueExistsError(nameValue, constantsStore); }
   };
 }
 
 module.exports = {
-  buildErrorDefinition: buildValueExistsErrorDefinition,
-  buildValueExistsError: buildValueExistsError,
-  valueExistsErrorCondition: valueExistsErrorCondition
+  build: buildValueExistsErrorDefinition
 };

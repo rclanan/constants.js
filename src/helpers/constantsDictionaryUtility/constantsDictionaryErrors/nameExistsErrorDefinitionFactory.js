@@ -6,30 +6,29 @@ stringFormatter = require('../../stringFormatter');
 nameExistsError = 'name "{name}" is already in use, value is {value}';
 
 
-function buildNameExistsError(nameValue, nameValueStore) {
+function buildNameExistsError(nameValue, constantsStore) {
   var errorText = stringFormatter.format(nameExistsError,
     {
       name: nameValue.name,
-      value: nameValueStore.getValueKey(nameValue)
+      value: constantsStore.getValueKey(nameValue)
     });
 
     return new Error(errorText);
   }
 
 
-  function nameExistsErrorCondition(nameValue, nameValueStore) {
-    return !!nameValueStore.nameValueMap[nameValue.name];
+  function nameExistsErrorCondition(nameValue, constantsStore) {
+    return !!constantsStore.nameValueMap[nameValue.name];
   }
 
-  function buildValueExistsErrorDefinition (nameValueStore) {
+  function buildValueExistsErrorDefinition (constantsStore) {
     return {
-      errorCondition: function(nameValue) { return nameExistsErrorCondition(nameValue, nameValueStore); },
-      errorBuilder: function(nameValue) { return buildNameExistsError(nameValue, nameValueStore); }
+      errorName: 'nameExists',
+      errorCondition: function(nameValue) { return nameExistsErrorCondition(nameValue, constantsStore); },
+      errorBuilder: function(nameValue) { return buildNameExistsError(nameValue, constantsStore); }
     };
   }
 
   module.exports = {
-    buildErrorDefinition: buildValueExistsErrorDefinition,
-    buildNameExistsError: buildNameExistsError,
-    nameExistsErrorCondition: nameExistsErrorCondition
+    build: buildValueExistsErrorDefinition
   };

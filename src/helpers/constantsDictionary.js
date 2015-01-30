@@ -2,7 +2,7 @@
 
 var constantsStoreFactory, constantsDictionaryFactory, createDictionary;
 
-constantsStoreFactory = require('./constantsDconstantsDictionaryUtility/constantsStoreFactory');
+constantsStoreFactory = require('./constantsDictionaryUtility/constantsStoreFactory');
 // needs a better name.
 constantsDictionaryFactory = require('./constantsDictionaryUtility/constantsDictionaryFactory');
 

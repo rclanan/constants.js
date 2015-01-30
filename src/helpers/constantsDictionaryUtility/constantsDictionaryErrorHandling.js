@@ -7,13 +7,13 @@ valueExistsErrorDefinitionFactory = require('./constantsDictionaryErrors/valueEx
 reservedNameErrorDefinitionFactory = require('./constantsDictionaryErrors/reservedNameErrorDefinitionFactory');
 
 
-function addNameValueObjectErrorHandling(options) {
+function addErrorHandling(options) {
   var errorHandling = options.errorHandling;
 
-  var reservedNameErrorDefinition = reservedNameErrorDefinitionFactory.buildErrorDefinition(options.constantsObjectName);
+  var reservedNameErrorDefinition = reservedNameErrorDefinitionFactory.build(options.constantsStore);
 
-  errorHandling.addErrorDefinition(nameExistsErrorDefinitionFactory.buildErrorDefinition(options.constantsStore));
-  errorHandling.addErrorDefinition(valueExistsErrorDefinitionFactory.buildErrorDefinition(options.constantsStore));
+  errorHandling.addErrorDefinition(nameExistsErrorDefinitionFactory.build(options.constantsStore));
+  errorHandling.addErrorDefinition(valueExistsErrorDefinitionFactory.build(options.constantsStore));
   errorHandling.addErrorDefinition(reservedNameErrorDefinition);
 
   errorHandling.addReservedName = reservedNameErrorDefinition.addReservedName;
@@ -21,5 +21,5 @@ function addNameValueObjectErrorHandling(options) {
 
 
 module.exports = {
-  addNameValueObjectErrorHandling: addNameValueObjectErrorHandling
+  addErrorHandling: addErrorHandling
 };
