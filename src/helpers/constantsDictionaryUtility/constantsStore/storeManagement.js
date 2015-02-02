@@ -10,17 +10,24 @@ function addSingle(nameValue, constantsStore) {
   valueNameMap[constantsStore.getValueKey(nameValue)] = nameValue.name;
 }
 
+function checkAddSingle(options) {
+  options.errorHandling.throwRelevantError(options.nameValue);
+  addSingle(options.nameValue, options.constantsStore);
+}
+
 function addAll(nameValues, constantsStore) {
-  var name, nameValue;
+  var keys;
 
-  for (name in nameValues) {
-    nameValue = {name: name, value: nameValues[name]};
+  keys = Object.keys(nameValues);
 
-    if (nameValues.hasOwnProperty(name)) {
-      constantsStore.errorHandling.throwRelevantError(nameValue);
-      addSingle({name: name, value: nameValues[name]}, constantsStore);
-    }
-  }
+  keys.forEach(function(name) {
+    checkAddSingle({
+      errorHandling: constantsStore.errorHandling,
+      constantsStore: constantsStore,
+      nameValue: { name: name, value: nameValues[name]}
+    });
+  });
+
 }
 
 module.exports = {
