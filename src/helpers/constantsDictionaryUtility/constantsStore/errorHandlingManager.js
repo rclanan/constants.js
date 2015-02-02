@@ -6,7 +6,6 @@ errorHandlingFactory = require('../errorHandlingFactory');
 constantsDictionaryErrorHandling = require('../constantsDictionaryErrorHandling');
 
 function addErrorHandling(options) {
-
   var errorHandling = errorHandlingFactory.build();
 
   constantsDictionaryErrorHandling.addErrorHandling({

@@ -24,7 +24,6 @@ createDictionary = function(options) {
   return constantsDictionaryFactory.build(constantsStore);
 };
 
-
 module.exports = {
   build: createDictionary
 };
