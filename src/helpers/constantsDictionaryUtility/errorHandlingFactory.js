@@ -3,7 +3,7 @@
 function throwRelevantError(errorValue, errorDefinitions) {
   errorDefinitions.forEach(function (errorDefinition){
     if(errorDefinition.condition(errorValue)) {
-      throw errorDefinition.buildError(errorValue);
+      throw new Error(errorDefinition.buildError(errorValue));
     }
   });
 }
@@ -25,7 +25,5 @@ function buildErrorHandling(){
 }
 
 module.exports = {
-  buildErrorHandling: buildErrorHandling,
-  addErrorDefinition: addErrorDefinition,
-  throwRelevantError: throwRelevantError
+  build: buildErrorHandling
 };

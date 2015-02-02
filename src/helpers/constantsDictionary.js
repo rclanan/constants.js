@@ -1,12 +1,11 @@
 'use strict';
 
-var constantsStoreFactory, constantsDictionaryFactory, createDictionary;
+var constantsStoreManager, constantsDictionaryFactory, createDictionary;
 
-constantsStoreFactory = require('./constantsDictionaryUtility/constantsStoreFactory');
+constantsStoreManager = require('./constantsDictionaryUtility/constantsStore/constantsStoreManager');
 // needs a better name.
 constantsDictionaryFactory = require('./constantsDictionaryUtility/constantsDictionaryFactory');
 
-// consider calling this a "dictionary". NameValueDictionary. beats the hell out of nameValueObject.
 createDictionary = function(options) {
   var constantsStore, getValueKey;
 
@@ -16,7 +15,7 @@ createDictionary = function(options) {
     return nameValue.value;
   };
 
-  constantsStore = constantsStoreFactory.build({
+  constantsStore = constantsStoreManager.build({
     getValueKey: getValueKey
   });
 
