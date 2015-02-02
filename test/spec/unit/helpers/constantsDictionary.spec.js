@@ -15,7 +15,7 @@ describe('constantsDictionary Unit Test', function() {
 
     testResults = {};
 
-    constantsDictionary = require('../../../src/helpers/constantsDictionary');
+    constantsDictionary = require('../../../../src/helpers/constantsDictionary');
     testResults.returnedDictionary = constantsDictionary.build(valuesPassedIn);
   });
 
