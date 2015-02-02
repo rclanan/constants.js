@@ -1,11 +1,11 @@
 'use strict';
 
-var domConstants, buildConstantsObject;
+var domConstants, build;
 
 domConstants = require('../helpers/domConstants');
 
-buildConstantsObject = function() {
-  var classes = domConstants.buildDomConstantsObject({
+build = function() {
+  var classes = domConstants.build({
     constantsObjectName: 'cssClasses',
     selectorSymbol: '.'
   });
@@ -19,5 +19,5 @@ buildConstantsObject = function() {
 };
 
 module.exports = {
-  buildConstantsObject:buildConstantsObject
+  build:build
 };

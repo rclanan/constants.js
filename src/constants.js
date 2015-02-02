@@ -1,6 +1,6 @@
 'use strict';
 
-var cssClasses, ids, attributes, tags, events, localizations, buildConstantsObject;
+var cssClasses, ids, attributes, tags, events, localizations, build;
 
 cssClasses = require('./definitions/cssClasses');
 ids = require('./definitions/ids');
@@ -9,17 +9,17 @@ tags = require('./definitions/tags');
 events = require('./definitions/events');
 localizations = require('./definitions/localizations');
 
-buildConstantsObject = function() {
+build = function() {
     return {
-      classes: cssClasses.buildConstantsObject(),
-      ids: ids.buildConstantsObject(),
-      attributes: attributes.buildConstantsObject(),
-      tags: tags.buildConstantsObject(),
-      events: events.buildConstantsObject(),
-      localizations: localizations.buildConstantsObject()
+      classes: cssClasses.build(),
+      ids: ids.build(),
+      attributes: attributes.build(),
+      tags: tags.build(),
+      events: events.build(),
+      localizations: localizations.build()
     };
 };
 
 module.exports = {
-  buildConstantsObject: buildConstantsObject
+  build: build
 };

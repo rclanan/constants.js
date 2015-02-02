@@ -1,8 +1,8 @@
 'use strict';
 
-var nameValueObject, buildConstantsObject;
+var dictionary, build;
 
-nameValueObject = require('../helpers/constantsDictionary');
+dictionary = require('../helpers/constantsDictionary');
 
 function buildHtmlTagValue(tagName, baseConstantsObject) {
   var html = '<' + tagName + ' />';
@@ -155,11 +155,11 @@ function addHtmlTags(tags){
   });
 }
 
-buildConstantsObject = function() {
+build = function() {
   var tags;
 
-  tags = nameValueObject.createNameValueObject({
-    constantsObjectName: 'tags',
+  tags = dictionary.build({
+    dictionaryName: 'tags',
     reservedWords: ['$elementBuilder', '$setElementBuilderFunction'],
     valueKeyFunction: function(nameValue) {
       return nameValue.value.name;
@@ -178,7 +178,7 @@ buildConstantsObject = function() {
 };
 
 module.exports = {
-  buildConstantsObject: buildConstantsObject,
+  build: build,
   extendAddFunction: extendAddFunction,
   buildHtmlTagValue: buildHtmlTagValue,
   addHtmlTags: addHtmlTags

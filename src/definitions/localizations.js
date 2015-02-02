@@ -1,29 +1,29 @@
 'use strict';
 
-var nameValueObject, buildConstantsObject;
+var dictionary, build;
 
-nameValueObject = require('../helpers/constantsDictionary');
+dictionary = require('../helpers/constantsDictionary');
 
-function buildLocalizationValue(localizationValue, baseConstantsObject) {
+function buildLocalizationValue(localizationValue, baseDictionary) {
   return {
     name: localizationValue,
-    getLocalizedValue: function() { return baseConstantsObject.$getLocalizedValue(localizationValue); }
+    getLocalizedValue: function() { return baseDictionary.$getLocalizedValue(localizationValue); }
   };
 }
 
-function extendAddFunction(baseConstantsObject) {
+function extendAddFunction(baseDictionary) {
   var superAdd;
 
-  superAdd = baseConstantsObject.$add;
+  superAdd = baseDictionary.$add;
 
-  baseConstantsObject.$add = function(nameValues) {
+  baseDictionary.$add = function(nameValues) {
     var givenValues, localizationName;
 
     givenValues = {};
 
     for (localizationName in nameValues) {
       if (nameValues.hasOwnProperty(localizationName)) {
-        givenValues[localizationName] = buildLocalizationValue(nameValues[localizationName], baseConstantsObject);
+        givenValues[localizationName] = buildLocalizationValue(nameValues[localizationName], baseDictionary);
       }
     }
 
@@ -31,15 +31,13 @@ function extendAddFunction(baseConstantsObject) {
   };
 }
 
-buildConstantsObject = function() {
+build = function() {
   var localizations;
 
   // instead of linking the function directly, we link a function that calls the function, this allows us
   // to change or set getLocalizedValue at a later time after adding the localization value.
-
-
-  localizations = nameValueObject.createNameValueObject({
-    constantsObjectName: 'localizations',
+  localizations = dictionary.build({
+    dictionaryName: 'localizations',
     reservedWords: ['$setGetLocalizedValueFunction', '$getLocalizedValue'],
     valueKeyFunction: function(nameValue) {
         return nameValue.value.name;
@@ -58,7 +56,7 @@ buildConstantsObject = function() {
 };
 
 module.exports = {
-  buildConstantsObject: buildConstantsObject,
+  build: build,
   buildLocalizationValue: buildLocalizationValue,
   extendAddFunction: extendAddFunction
 };

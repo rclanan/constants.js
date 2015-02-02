@@ -1,12 +1,12 @@
 'use strict';
 
-var nameValueObject, buildConstantsObject;
+var dictionary, build;
 
-nameValueObject = require('../helpers/constantsDictionary');
+dictionary = require('../helpers/constantsDictionary');
 
-buildConstantsObject = function() {
-  var events = nameValueObject.createNameValueObject({
-    constantsObjectName: 'events'
+build = function() {
+  var events = dictionary.createNameValueObject({
+    dictionaryName: 'events'
   });
 
   events.$add({
@@ -83,5 +83,5 @@ buildConstantsObject = function() {
 };
 
 module.exports = {
-  buildConstantsObject:buildConstantsObject
+  build:build
 };
