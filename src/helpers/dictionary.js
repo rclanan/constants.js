@@ -1,12 +1,12 @@
 'use strict';
 
-var storeManager, dictionaryBuilder, buildDictionary;
+var storeManagerBuilder, dictionaryBuilder, buildDictionary;
 
-storeManager = require('./dictionaryUtility/constantsStore/storeManager');
+storeManagerBuilder = require('./dictionaryUtility/store/storeManagerBuilder');
 dictionaryBuilder = require('./dictionaryUtility/dictionaryBuilder');
 
 buildDictionary = function(options) {
-  var constantsStore, getValueKey;
+  var store, getValueKey;
 
   options.reservedWords = options.reservedWords ? options.reservedWords : [];
 
@@ -14,13 +14,13 @@ buildDictionary = function(options) {
     return nameValue.value;
   };
 
-  constantsStore = storeManager.build({
+  store = storeManagerBuilder.build({
     getValueKey: getValueKey
   });
 
-  options.reservedWords.forEach(constantsStore.addReservedName);
+  options.reservedWords.forEach(store.addReservedName);
 
-  return dictionaryBuilder.build(constantsStore);
+  return dictionaryBuilder.build(store);
 };
 
 module.exports = {

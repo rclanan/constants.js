@@ -1,39 +1,39 @@
 'use strict';
 
 describe('dictionary Unit Test', function() {
-  var dictionary, testResults, valuesPassedIn, expectedResults;
+  var dictionary, testResults, valuesPassedIn, expectedResults, given;
 
   beforeAll(function(){
-    valuesPassedIn = {
+    given = {};
+
+    given.dictionaryBuilderOptions = {
       constantsObjectName: 'constantsTest',
       reservedNames: ['foo', '$bar']
     };
 
+    given.nameValues = {
+      test: '123',
+      stuff: 'moreStuff'
+    };
+
     expectedResults = {
-      reservedNames: valuesPassedIn.reservedNames
+      reservedNames: given.dictionaryBuilderOptions.reservedNames,
+      nameValues: given.nameValues
     };
 
     testResults = {};
 
     dictionary = require('../../../../src/helpers/dictionary');
-    testResults.returnedDictionary = dictionary.build(valuesPassedIn);
+    testResults.returnedDictionary = dictionary.build(given.dictionaryBuilderOptions);
+    testResults.returnedDictionary.$add(given.nameValues);
   });
 
   it('should have return object an $add method attached to it', function() {
-    var dictionary = dictionary.build({
-      constantsObjectName: 'test'
-    });
-
-    expect(dictionary.hasOwnProperty('$add')).toBeTruthy();
+    expect(testResults.returnedDictionary.hasOwnProperty('$add')).toBeTruthy();
   });
 
   it('should allow key value pairs to be added to object', function() {
-    var dictionary = dictionary.build({
-      constantsObjectName: 'test'
-    });
-
-    dictionary.$add({test: '123'});
-
-    expect(dictionary.test).toEqual('123');
+    expect(testResults.returnedDictionary.test).toEqual(expectedResults.nameValues.test);
+    expect(testResults.returnedDictionary.stuff).toEqual(expectedResults.nameValues.stuff);
   });
 });
