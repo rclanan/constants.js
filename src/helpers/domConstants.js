@@ -2,7 +2,7 @@
 
 var nameValueObject, buildDomConstantsObject;
 
-nameValueObject = require('./constantsDictionary');
+nameValueObject = require('./dictionary');
 
 function buildConstantsObject(domConstantsDefinition) {
   var domConstants, reservedWords;

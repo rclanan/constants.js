@@ -1,12 +1,12 @@
 'use strict';
 
-var constantsStoreFactory, storeManagement;
+var storeBuilder, storeManagement;
 
-constantsStoreFactory = require('./constantsStoreFactory');
+storeBuilder = require('./storeBuilder');
 storeManagement = require('./storeManagement');
 
 function addPropertyErrorHandling(options) {
-  Object.defineProperty(options.constantsStore,
+  Object.defineProperty(options.store,
     'errorHandling',
     {
       enumerable: false,
@@ -16,7 +16,7 @@ function addPropertyErrorHandling(options) {
 }
 
 function addPropertyAddReservedName(options) {
-  Object.defineProperty(options.constantsStore,
+  Object.defineProperty(options.store,
     'addReservedName',
     {
       enumerable: false,
@@ -31,30 +31,30 @@ function addProperties(options) {
 }
 
 function createStore(storeBase) {
-  var constantsStore;
+  var store;
 
-  constantsStore = {
+  store = {
     add: function(nameValues) { storeManagement.addAll(nameValues, storeBase); },
     data: storeBase
   };
 
-  return constantsStore;
+  return store;
 }
 
-function buildConstantsStoreManager(options) {
-  var storeBase, constantsStore;
+function buildstoreManager(options) {
+  var storeBase, store;
 
-  storeBase = constantsStoreFactory.build(options);
-  constantsStore = createStore(storeBase);
+  storeBase = storeBuilder.build(options);
+  store = createStore(storeBase);
 
   addProperties({
-    constantsStore: constantsStore,
+    store: store,
     storeBase: storeBase
   });
 
-  return constantsStore;
+  return store;
 }
 
 module.exports = {
-  build: buildConstantsStoreManager
+  build: buildstoreManager
 };

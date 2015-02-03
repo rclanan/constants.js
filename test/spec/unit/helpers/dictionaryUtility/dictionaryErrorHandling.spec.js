@@ -1,7 +1,7 @@
 'use strict';
-var constantsDictionaryErrorHandling = require('../../../../../src/helpers/constantsDictionaryUtility/constantsDictionaryErrorHandling');
+var dictionaryErrorHandling = require('../../../../../src/helpers/dictionaryUtility/dictionaryErrorHandling');
 
-describe('constantsDictionaryErrorHandling', function(){
+describe('dictionaryErrorHandling', function(){
   var givenErrorHandling, addedErrors;
   beforeAll(function(){
     addedErrors = [];
@@ -12,8 +12,8 @@ describe('constantsDictionaryErrorHandling', function(){
       }
     };
 
-    constantsDictionaryErrorHandling.addErrorHandling({
-      constantsStore: {},
+    dictionaryErrorHandling.addErrorHandling({
+      store: {},
       errorHandling: givenErrorHandling
     });
 

@@ -6,11 +6,11 @@ stringFormatter = require('../../stringFormatter');
 
 nameExistsError = 'name "{name}" is reserved for {type} constants dictionary';
 
-function buildNameReservedError(nameValue, constantsStore) {
+function buildNameReservedError(nameValue, store) {
   var errorText = stringFormatter.format(nameExistsError,
   {
     name: nameValue.name,
-    type: constantsStore.constantsDictionaryName
+    type: store.dictionaryName
   });
 
   return new Error(errorText);
@@ -24,13 +24,13 @@ function addReservedName(name, reservedNames) {
   reservedNames[name] = true;
 }
 
-function buildReservedNameErrorDefinition (constantsStore) {
+function buildReservedNameErrorDefinition (store) {
   var reservedNames = {};
 
   return {
     errorName: 'nameReserved',
     errorCondition: function(nameValue) { return nameReservedErrorCondition(nameValue, reservedNames); },
-    errorBuilder: function(nameValue) { return buildNameReservedError(nameValue, constantsStore); },
+    errorBuilder: function(nameValue) { return buildNameReservedError(nameValue, store); },
     addReservedName: function(name) { addReservedName(name, reservedNames); }
   };
 }

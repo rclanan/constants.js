@@ -2,7 +2,7 @@
 
 var dictionary, build;
 
-dictionary = require('../helpers/constantsDictionary');
+dictionary = require('../helpers/dictionary');
 
 build = function() {
   var events = dictionary.createNameValueObject({

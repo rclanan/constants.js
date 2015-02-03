@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp, testRunnerFactory, unitTestModifier, integrationTestModifier, debugModifier, allBrowsersModifier;
+var gulp, testRunnerBuilder, unitTestModifier, integrationTestModifier, debugModifier, allBrowsersModifier;
 
 integrationTestModifier = require('../../karma/karmaIntegrationTestConfigurationModifier');
 unitTestModifier = require('../../karma/karmaUnitTestsConfigurationModifier');
@@ -8,34 +8,34 @@ debugModifier = require('../../karma/karmaDebugConfigurationModifier');
 allBrowsersModifier = require('../../karma/karmaAllBrowsersConfigurationModifier');
 
 gulp = require('gulp');
-testRunnerFactory  = require('./karma/testRunnerFactory');
+testRunnerBuilder  = require('./karma/testRunnerBuilder');
 
-gulp.task('karma', testRunnerFactory.buildTestRunner([unitTestModifier]));
-gulp.task('karma:watch', testRunnerFactory.buildTestRunner([unitTestModifier]));
+gulp.task('karma', testRunnerBuilder.buildTestRunner([unitTestModifier]));
+gulp.task('karma:watch', testRunnerBuilder.buildTestRunner([unitTestModifier]));
 
-gulp.task('karma:all', testRunnerFactory.buildTestRunner([]));
-gulp.task('karma:all:debug', testRunnerFactory.buildTestRunner([debugModifier]));
-gulp.task('karma:all:allBrowsers', testRunnerFactory.buildTestRunner([allBrowsersModifier]));
+gulp.task('karma:all', testRunnerBuilder.buildTestRunner([]));
+gulp.task('karma:all:debug', testRunnerBuilder.buildTestRunner([debugModifier]));
+gulp.task('karma:all:allBrowsers', testRunnerBuilder.buildTestRunner([allBrowsersModifier]));
 
-gulp.task('karma:unitTests', testRunnerFactory.buildTestRunner([unitTestModifier]));
-gulp.task('karma:unitTests:debug', testRunnerFactory.buildTestRunner([unitTestModifier, debugModifier]));
-gulp.task('karma:unitTests:allBrowsers', testRunnerFactory.buildTestRunner([unitTestModifier, allBrowsersModifier]));
+gulp.task('karma:unitTests', testRunnerBuilder.buildTestRunner([unitTestModifier]));
+gulp.task('karma:unitTests:debug', testRunnerBuilder.buildTestRunner([unitTestModifier, debugModifier]));
+gulp.task('karma:unitTests:allBrowsers', testRunnerBuilder.buildTestRunner([unitTestModifier, allBrowsersModifier]));
 
 
-gulp.task('karma:integrationTests', testRunnerFactory.buildTestRunner([integrationTestModifier]));
-gulp.task('karma:integrationTests:debug', testRunnerFactory.buildTestRunner([integrationTestModifier, debugModifier]));
-gulp.task('karma:integrationTests:allBrowsers', testRunnerFactory.buildTestRunner([integrationTestModifier, allBrowsersModifier]));
+gulp.task('karma:integrationTests', testRunnerBuilder.buildTestRunner([integrationTestModifier]));
+gulp.task('karma:integrationTests:debug', testRunnerBuilder.buildTestRunner([integrationTestModifier, debugModifier]));
+gulp.task('karma:integrationTests:allBrowsers', testRunnerBuilder.buildTestRunner([integrationTestModifier, allBrowsersModifier]));
 
 module.exports = {
-  karama: testRunnerFactory.buildTestRunner([unitTestModifier]),
-  karamWatch: testRunnerFactory.buildTestRunner([unitTestModifier]),
-  karmaAll: testRunnerFactory.buildTestRunner([]),
-  karmaAllDebug: testRunnerFactory.buildTestRunner([debugModifier]),
-  karmaAllAllBrowsers: testRunnerFactory.buildTestRunner([allBrowsersModifier]),
-  karmaUnitTests: testRunnerFactory.buildTestRunner([unitTestModifier]),
-  karmaUnitTestsDebug: testRunnerFactory.buildTestRunner([unitTestModifier, debugModifier]),
-  karmaUnitTestsAllBrowsers: testRunnerFactory.buildTestRunner([unitTestModifier, allBrowsersModifier]),
-  karmaIntegrationTests: testRunnerFactory.buildTestRunner([integrationTestModifier]),
-  karmaIntegrationTestsDebug: testRunnerFactory.buildTestRunner([integrationTestModifier, debugModifier]),
-  karmaIntegrationTestsAllBrowsers: testRunnerFactory.buildTestRunner([integrationTestModifier, allBrowsersModifier])
+  karama: testRunnerBuilder.buildTestRunner([unitTestModifier]),
+  karamWatch: testRunnerBuilder.buildTestRunner([unitTestModifier]),
+  karmaAll: testRunnerBuilder.buildTestRunner([]),
+  karmaAllDebug: testRunnerBuilder.buildTestRunner([debugModifier]),
+  karmaAllAllBrowsers: testRunnerBuilder.buildTestRunner([allBrowsersModifier]),
+  karmaUnitTests: testRunnerBuilder.buildTestRunner([unitTestModifier]),
+  karmaUnitTestsDebug: testRunnerBuilder.buildTestRunner([unitTestModifier, debugModifier]),
+  karmaUnitTestsAllBrowsers: testRunnerBuilder.buildTestRunner([unitTestModifier, allBrowsersModifier]),
+  karmaIntegrationTests: testRunnerBuilder.buildTestRunner([integrationTestModifier]),
+  karmaIntegrationTestsDebug: testRunnerBuilder.buildTestRunner([integrationTestModifier, debugModifier]),
+  karmaIntegrationTestsAllBrowsers: testRunnerBuilder.buildTestRunner([integrationTestModifier, allBrowsersModifier])
 };

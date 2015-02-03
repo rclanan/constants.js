@@ -2,7 +2,7 @@
 
 var dictionary, build;
 
-dictionary = require('../helpers/constantsDictionary');
+dictionary = require('../helpers/dictionary');
 
 function buildHtmlTagValue(tagName, baseConstantsObject) {
   var html = '<' + tagName + ' />';

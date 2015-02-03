@@ -1,7 +1,7 @@
 'use strict';
 
-describe('constantsDictionary Unit Test', function() {
-  var constantsDictionary, testResults, valuesPassedIn, expectedResults;
+describe('dictionary Unit Test', function() {
+  var dictionary, testResults, valuesPassedIn, expectedResults;
 
   beforeAll(function(){
     valuesPassedIn = {
@@ -15,12 +15,12 @@ describe('constantsDictionary Unit Test', function() {
 
     testResults = {};
 
-    constantsDictionary = require('../../../../src/helpers/constantsDictionary');
-    testResults.returnedDictionary = constantsDictionary.build(valuesPassedIn);
+    dictionary = require('../../../../src/helpers/dictionary');
+    testResults.returnedDictionary = dictionary.build(valuesPassedIn);
   });
 
   it('should have return object an $add method attached to it', function() {
-    var dictionary = constantsDictionary.build({
+    var dictionary = dictionary.build({
       constantsObjectName: 'test'
     });
 
@@ -28,7 +28,7 @@ describe('constantsDictionary Unit Test', function() {
   });
 
   it('should allow key value pairs to be added to object', function() {
-    var dictionary = constantsDictionary.build({
+    var dictionary = dictionary.build({
       constantsObjectName: 'test'
     });
 

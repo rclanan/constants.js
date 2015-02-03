@@ -1,13 +1,13 @@
-(function(window, factory) {
+(function(window, Builder) {
   if (typeof define === 'function' && define.amd) {
     // AMD
-    define(factory);
+    define(Builder);
   } else if (typeof exports === 'object') {
     // CommonJS
-    module.exports = factory();
+    module.exports = Builder();
   } else {
     // Browser Global (constants is your global library identifier)
-    window.constants = factory();
+    window.constants = Builder();
   }
 }(this, function() {
   var require, itemToExport;

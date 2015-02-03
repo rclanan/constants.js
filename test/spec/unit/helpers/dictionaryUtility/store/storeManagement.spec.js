@@ -11,7 +11,7 @@ describe('storeManagement', function() {
   var storeManagement, nameValueSingleTest, nameValueMultiTest, results;
   beforeAll(function() {
 
-    storeManagement = require('../../../../../../src/helpers/constantsDictionaryUtility/constantsStore/storeManagement');
+    storeManagement = require('../../../../../../src/helpers/dictionaryUtility/store/storeManagement');
 
     results = {};
     results.singleTest = {

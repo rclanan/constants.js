@@ -1,22 +1,22 @@
 'use strict';
-var valueExistsErrorDefinitionFactory = require('../../../../../../src/helpers/constantsDictionaryUtility/constantsDictionaryErrors/valueExistsErrorDefinitionFactory');
+var valueExistsErrorDefinitionBuilder = require('../../../../../../src/helpers/dictionaryUtility/dictionaryErrors/valueExistsErrorDefinitionBuilder');
 
-describe('valueExistsErrorDefinitionFactory', function(){
-  var valueExistsErrorDefinition, constantsStore, nameValueGiven, nameValueMock;
+describe('valueExistsErrorDefinitionBuilder', function(){
+  var valueExistsErrorDefinition, store, nameValueGiven, nameValueMock;
 
   beforeAll(function(){
     nameValueGiven = { name:'foo', value:'bar'};
     nameValueMock = { name:'other', value:'bar'};
-    constantsStore = {
+    store = {
       valueNameMap: {},
       getValueKey: function(nameValue) {
         return nameValue.value;
       }
     };
 
-    constantsStore.valueNameMap[nameValueGiven.value] = nameValueGiven.name;
+    store.valueNameMap[nameValueGiven.value] = nameValueGiven.name;
 
-    valueExistsErrorDefinition = valueExistsErrorDefinitionFactory.build(constantsStore);
+    valueExistsErrorDefinition = valueExistsErrorDefinitionBuilder.build(store);
   });
 
   it('should contain the correct errorName', function() {

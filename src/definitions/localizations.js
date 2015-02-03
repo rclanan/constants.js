@@ -2,7 +2,7 @@
 
 var dictionary, build;
 
-dictionary = require('../helpers/constantsDictionary');
+dictionary = require('../helpers/dictionary');
 
 function buildLocalizationValue(localizationValue, baseDictionary) {
   return {

@@ -1,22 +1,22 @@
 'use strict';
-var nameExistsErrorDefinitionFactory = require('../../../../../../src/helpers/constantsDictionaryUtility/constantsDictionaryErrors/nameExistsErrorDefinitionFactory');
+var nameExistsErrorDefinitionBuilder = require('../../../../../../src/helpers/dictionaryUtility/dictionaryErrors/nameExistsErrorDefinitionBuilder');
 
-describe('nameExistsErrorDefinitionFactory', function(){
-  var nameExistsErrorDefinition, constantsStore, nameValueGiven, nameValueMock;
+describe('nameExistsErrorDefinitionBuilder', function(){
+  var nameExistsErrorDefinition, store, nameValueGiven, nameValueMock;
 
   beforeAll(function(){
     nameValueGiven = { name:'foo', value:'bar'};
     nameValueMock = { name:'foo', value:'other'};
-    constantsStore = {
+    store = {
       nameValueMap: {},
       getValueKey: function(nameValue) {
         return nameValue.value;
       }
     };
 
-    constantsStore.nameValueMap[nameValueGiven.name] = nameValueGiven.value;
+    store.nameValueMap[nameValueGiven.name] = nameValueGiven.value;
 
-    nameExistsErrorDefinition = nameExistsErrorDefinitionFactory.build(constantsStore);
+    nameExistsErrorDefinition = nameExistsErrorDefinitionBuilder.build(store);
   });
 
   it('should contain the correct errorName', function() {

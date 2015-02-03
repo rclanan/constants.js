@@ -1,8 +1,8 @@
 'use strict';
 
-var constantsStoreErrorHandlingManager;
+var storeErrorHandlingManager;
 
-constantsStoreErrorHandlingManager = require('./errorHandlingManager');
+storeErrorHandlingManager = require('./errorHandlingManager');
 
 function buildDataStore(options) {
   var storeBase;
@@ -13,7 +13,7 @@ function buildDataStore(options) {
     getValueKey: options.getValueKey
   };
 
-  storeBase = constantsStoreErrorHandlingManager.addToStore({
+  storeBase = storeErrorHandlingManager.addToStore({
     store: storeBase,
     constantsObjectName: options.constantsObjectName,
     errorHandling: storeBase.errorHandling

@@ -1,11 +1,11 @@
 'use strict';
 
-describe('errorHandlingFactory', function(){
-  var errorHandlingFactory, errorHandling, fakeErrorDefinitionSuccess, fakeErrorDefinitionFail, results;
+describe('errorHandlingBuilder', function(){
+  var errorHandlingBuilder, errorHandling, fakeErrorDefinitionSuccess, fakeErrorDefinitionFail, results;
 
   beforeAll(function(){
-    errorHandlingFactory = require('../../../../../src/helpers/constantsDictionaryUtility/errorHandlingFactory');
-    errorHandling = errorHandlingFactory.build();
+    errorHandlingBuilder = require('../../../../../src/helpers/dictionaryUtility/errorHandlingBuilder');
+    errorHandling = errorHandlingBuilder.build();
 
     results = {
       conditionChecked: {},

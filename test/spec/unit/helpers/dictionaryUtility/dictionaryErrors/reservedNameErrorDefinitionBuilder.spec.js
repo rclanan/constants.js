@@ -1,18 +1,18 @@
 'use strict';
-var reservedNameErrorDefinitionFactory = require('../../../../../../src/helpers/constantsDictionaryUtility/constantsDictionaryErrors/reservedNameErrorDefinitionFactory');
+var reservedNameErrorDefinitionBuilder = require('../../../../../../src/helpers/dictionaryUtility/dictionaryErrors/reservedNameErrorDefinitionBuilder');
 
-describe('nameExistsErrorDefinitionFactory', function(){
-  var reservedNameErrorDefinition, constantsStore, nameValueReserved, nameValueNotReserved, reservedWord;
+describe('nameExistsErrorDefinitionBuilder', function(){
+  var reservedNameErrorDefinition, store, nameValueReserved, nameValueNotReserved, reservedWord;
 
   beforeAll(function(){
     reservedWord = 'blarg';
     nameValueReserved = { name:reservedWord, value:'bar'};
     nameValueNotReserved = { name:'foo', value:'other'};
-    constantsStore = {
-      constantsDictionaryName: 'test'
+    store = {
+      dictionaryName: 'test'
     };
 
-    reservedNameErrorDefinition = reservedNameErrorDefinitionFactory.build(constantsStore);
+    reservedNameErrorDefinition = reservedNameErrorDefinitionBuilder.build(store);
     reservedNameErrorDefinition.addReservedName(reservedWord);
   });
 
@@ -33,6 +33,6 @@ describe('nameExistsErrorDefinitionFactory', function(){
   it('should return an string reflecting the correct error', function() {
     var results = reservedNameErrorDefinition.errorBuilder(nameValueReserved);
 
-    expect(results).toMatch('name "'+reservedWord+'" is reserved for '+ constantsStore.constantsDictionaryName+' constants dictionary');
+    expect(results).toMatch('name "'+reservedWord+'" is reserved for '+ store.dictionaryName+' constants dictionary');
   });
 });

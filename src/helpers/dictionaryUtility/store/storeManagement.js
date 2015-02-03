@@ -1,29 +1,29 @@
 'use strict';
 
-function addSingle(nameValue, constantsStore) {
+function addSingle(nameValue, store) {
   var nameValueMap, valueNameMap;
 
-  nameValueMap = constantsStore.nameValueMap;
-  valueNameMap = constantsStore.valueNameMap;
+  nameValueMap = store.nameValueMap;
+  valueNameMap = store.valueNameMap;
 
   nameValueMap[nameValue.name] = nameValue.value;
-  valueNameMap[constantsStore.getValueKey(nameValue)] = nameValue.name;
+  valueNameMap[store.getValueKey(nameValue)] = nameValue.name;
 }
 
 function checkAddSingle(options) {
   options.errorHandling.throwRelevantError(options.nameValue);
-  addSingle(options.nameValue, options.constantsStore);
+  addSingle(options.nameValue, options.store);
 }
 
-function addAll(nameValues, constantsStore) {
+function addAll(nameValues, store) {
   var keys;
 
   keys = Object.keys(nameValues);
 
   keys.forEach(function(name) {
     checkAddSingle({
-      errorHandling: constantsStore.errorHandling,
-      constantsStore: constantsStore,
+      errorHandling: store.errorHandling,
+      store: store,
       nameValue: { name: name, value: nameValues[name]}
     });
   });

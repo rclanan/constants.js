@@ -21,7 +21,7 @@ function buildErrorHandling(){
     addErrorDefinition: function(errorDefinition){ addErrorDefinition( errorDefinition, errorHandling.errorDefinitions); },
     throwRelevantError: function(errorValue) { throwRelevantError(errorValue, errorHandling.errorDefinitions);}
   };
-  
+
   return errorHandling;
 }
 
