@@ -1,7 +1,7 @@
 'use strict';
 
 describe('dictionary Unit Test', function() {
-  var dictionary, testResults, valuesPassedIn, expectedResults, given;
+  var dictionary, testResults, expectedResults, given;
 
   beforeAll(function(){
     given = {};
