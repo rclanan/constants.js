@@ -8,6 +8,7 @@ function buildDataStore(options) {
   var storeBase;
 
   storeBase = {
+    dictionaryName: options.dictionaryName,
     nameValueMap: {},
     valueNameMap: {},
     getValueKey: options.getValueKey
@@ -15,7 +16,6 @@ function buildDataStore(options) {
 
   storeBase = storeErrorHandlingManager.addToStore({
     store: storeBase,
-    constantsObjectName: options.constantsObjectName,
     errorHandling: storeBase.errorHandling
   });
 
