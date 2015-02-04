@@ -8,7 +8,7 @@ dictionaryBuilder = require('./dictionaryUtility/dictionaryBuilder');
 buildDictionary = function(options) {
   var store, getValueKey;
 
-  options.reservedWords = options.reservedWords ? options.reservedWords : [];
+  options.reservedNames = options.reservedNames ? options.reservedNames : [];
 
   getValueKey = options.valueKeyFunction || function(nameValue) {
     return nameValue.value;
@@ -18,7 +18,7 @@ buildDictionary = function(options) {
     getValueKey: getValueKey
   });
 
-  options.reservedWords.forEach(store.addReservedName);
+  options.reservedNames.forEach(store.addReservedName);
 
   return dictionaryBuilder.build(store);
 };

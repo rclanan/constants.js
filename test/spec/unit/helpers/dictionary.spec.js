@@ -1,39 +1,153 @@
 'use strict';
+var sinon, storeLibrary, dictionaryUtilityLibrary, helpersLibrary, storeLibrary;
+
+sinon = require('sinon');
+helpersLibrary = require('../../../locationHelpers/helpersLibrary');
+dictionaryUtilityLibrary = require('../../../locationHelpers/dictionaryUtilityLibrary');
+storeLibrary = require('../../../locationHelpers/storeLibrary');
+/*
+storeManagerBuilder = require('./dictionaryUtility/store/storeManagerBuilder');
+dictionaryBuilder = require('./dictionaryUtility/dictionaryBuilder');
+
+buildDictionary = function(options) {
+var store, getValueKey;
+
+options.reservedWords = options.reservedWords ? options.reservedWords : [];
+
+getValueKey = options.valueKeyFunction || function(nameValue) {
+return nameValue.value;
+};
+
+store = storeManagerBuilder.build({
+getValueKey: getValueKey
+});
+
+options.reservedNames.forEach(store.addReservedName);
+
+return dictionaryBuilder.build(store);
+};
+ */
+
+function buildStoreMock(storeName) {
+  var reservedNames = [];
+  return {
+    name: storeName,
+    reservedNames: reservedNames,
+    addReservedName: function(name){
+      reservedNames.push(name);
+    }
+  };
+}
+
+function runTests(given, mocks){
+  //stub
+  var results = {
+    storeManagerBuilder: {},
+    dictionaryBuilder: {}
+  };
+
+  sinon.stub(storeLibrary.storeManagerBuilder, 'build', function(options){
+    var build = {};
+    build.givenOptions = options;
+
+    results.storeManagerBuilder.build = build;
+    return mocks.storeManagerBuilder.build;
+  });
+
+  sinon.stub(dictionaryUtilityLibrary.dictionaryBuilder, 'build', function(options){
+    var build = {};
+    build.givenOptions = options;
+    results.dictionaryBuilder.build = build;
+
+    return mocks.dictionaryBuilder.build;
+  });
+
+  results.dictionary = helpersLibrary.dictionary.build(given);
+
+  dictionaryUtilityLibrary.dictionaryBuilder.build.restore();
+  storeLibrary.storeManagerBuilder.build.restore();
+
+  return results;
+}
 
 describe('dictionary Unit Test', function() {
-  var dictionary, testResults, expectedResults, given;
+  var given, results, mocks;
 
   beforeAll(function(){
-    given = {};
+    given = {
+      withoutGetItem: {
+        reservedNames: ['foo','bar','other']
+      },
+      withGetItem: {
+        reservedNames: ['foo','bar'],
+        valueKeyFunction: function() {
+          return 'customStuff';
+        }
+      }
 
-    given.dictionaryBuilderOptions = {
-      constantsObjectName: 'constantsTest',
-      reservedNames: ['foo', '$bar']
+    };
+    results = {};
+    mocks = {
+      withoutGetItem: {
+        dictionaryBuilder: {
+          build: {
+            name: 'withGetItemDictionary'
+          }
+        },
+        storeManagerBuilder: {
+          build: buildStoreMock('withoutGetItemStoreManager')
+        }
+      },
+      withGetItem: {
+        dictionaryBuilder: {
+          build: {
+            name: 'withGetItemDictionary'
+          }
+        },
+        storeManagerBuilder: {
+          build: buildStoreMock('withGetItemStoreManager')
+        }
+      }
     };
 
-    given.nameValues = {
-      test: '123',
-      stuff: 'moreStuff'
-    };
-
-    expectedResults = {
-      reservedNames: given.dictionaryBuilderOptions.reservedNames,
-      nameValues: given.nameValues
-    };
-
-    testResults = {};
-
-    dictionary = require('../../../../src/helpers/dictionary');
-    testResults.returnedDictionary = dictionary.build(given.dictionaryBuilderOptions);
-    testResults.returnedDictionary.$add(given.nameValues);
+    results.withoutGetItem = runTests(given.withoutGetItem, mocks.withoutGetItem);
+    results.withGetItem = runTests(given.withGetItem, mocks.withGetItem);
   });
 
-  it('should have return object an $add method attached to it', function() {
-    expect(testResults.returnedDictionary.hasOwnProperty('$add')).toBeTruthy();
+  it('should return a dictionary returned from dictionaryBuilder', function() {
+    expect(results.withGetItem.dictionary).toBe(mocks.withGetItem.dictionaryBuilder.build);
+    expect(results.withoutGetItem.dictionary).toBe(mocks.withoutGetItem.dictionaryBuilder.build);
   });
 
-  it('should allow key value pairs to be added to object', function() {
-    expect(testResults.returnedDictionary.test).toEqual(expectedResults.nameValues.test);
-    expect(testResults.returnedDictionary.stuff).toEqual(expectedResults.nameValues.stuff);
+  it('should pass in the store returned from storeManagerBuilder to dictionaryBuilder', function() {
+    expect(results.withGetItem.dictionaryBuilder.givenOptions).toBe(mocks.withGetItem.storeManagerBuilder.store);
+    expect(results.withoutGetItem.dictionaryBuilder.givenOptions).toBe(mocks.withoutGetItem.storeManagerBuilder.store);
   });
+
+  it('should add all reservedNames passed in', function() {
+
+    var tests = ['withGetItem', 'withoutGetItem'];
+
+    tests.forEach(function(testName){
+      var testGiven, testStore;
+      testGiven = given[testName];
+      testStore = mocks[testName].storeManagerBuilder.build;
+
+      expect(testStore.reservedNames.length).toEqual(testGiven.reservedNames.length);
+      testGiven.reservedNames.forEach(function(item){
+        expect(testStore.reservedNames).toContain(item);
+      });
+    });
+  });
+
+  it('should use a default getItemValue that returns the value for the name if getItemValue is not specified', function(){
+    var getItemValue = results.withoutGetItem.storeManagerBuilder.build.givenOptions.getValueKey;
+    expect(getItemValue({name:'foo', value:'bar'})).toMatch('bar');
+  });
+
+  it('should use getItemValue given in options', function() {
+    var getItemValue = results.withGetItem.storeManagerBuilder.build.givenOptions.getValueKey;
+    expect(getItemValue).toBe(given.withGetItem.valueKeyFunction);
+  });
+
 });
