@@ -1,36 +1,11 @@
 'use strict';
-var sinon, storeErrorHandlingManager;
+var sinon, storeLibrary;
 
 sinon = require('sinon');
-storeErrorHandlingManager = require('../../../../../../src/helpers/dictionaryUtility/store/errorHandlingManager');
-
-//require('jasmine-sinon');
-
-/*
-function buildDataStore(options) {
-var storeBase;
-
-storeBase = {
-nameValueMap: {},
-valueNameMap: {},
-getValueKey: options.getValueKey
-};
-
-storeBase = storeErrorHandlingManager.addToStore({
-store: storeBase,
-constantsObjectName: options.constantsObjectName,
-errorHandling: storeBase.errorHandling
-});
-
-storeBase.errorHandling.addReservedName('$add');
-
-return storeBase;
-}
-
- */
+storeLibrary = require('../../../../../locationHelpers/storeLibrary');
 
 describe('storeBuilder', function(){
-  var storeBuilder, given, results, mocks;
+  var given, results, mocks;
 
   beforeAll(function(){
 
@@ -50,17 +25,17 @@ describe('storeBuilder', function(){
     results = {
       reserved: []
     };
+
     // stub
-    sinon.stub(storeErrorHandlingManager, 'addToStore', function(given){
+    sinon.stub(storeLibrary.errorHandlingManager, 'addToStore', function(given){
       results.given = given;
       given.store.errorHandling = mocks.errorHandling;
       return given.store;
     });
 
-    storeBuilder = require('../../../../../../src/helpers/dictionaryUtility/store/storeBuilder');
-    results.store = storeBuilder.build(given.storeBuilderOptions);
+    results.store = storeLibrary.storeBuilder.build(given.storeBuilderOptions);
 
-    storeErrorHandlingManager.addToStore.restore();
+    storeLibrary.errorHandlingManager.addToStore.restore();
   });
 
   // this is where I could use mocking. I could confirm not only that they are there, but they are the correct object...
