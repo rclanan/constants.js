@@ -6,7 +6,7 @@ domConstants = require('../helpers/domConstants');
 
 build = function() {
   var classes = domConstants.build({
-    constantsObjectName: 'cssClasses',
+    dictionaryObjectName: 'cssClasses',
     selectorSymbol: '.'
   });
 

@@ -1,18 +1,18 @@
 'use strict';
 
-var nameValueObject, buildDomConstantsObject;
+var dictionary, buildDomConstantsObject;
 
-nameValueObject = require('./dictionary');
+dictionary = require('dictionary');
 
-function buildConstantsObject(domConstantsDefinition) {
-  var domConstants, reservedWords;
+function buildConstantsObject(options) {
+  var domConstants, reservedNames;
 
-  reservedWords = domConstantsDefinition.reservedWorlds ? domConstantsDefinition.reservedWorlds : [];
-  reservedWords.push('$setFindElementsFunction');
+  reservedNames = options.reservedNames ? options.reservedNames : [];
+  reservedNames.push('$setFindElementsFunction');
 
-  domConstants = nameValueObject.createNameValueObject({
-    reservedWords: reservedWords,
-    constantsObjectName: domConstantsDefinition.constantsObjectName,
+  domConstants = dictionary.build({
+    reservedNames: reservedNames,
+    dictionaryObjectName: options.dictionaryObjectName,
     valueKeyFunction: function(nameValue) {
       return nameValue.value.name;
     }
@@ -51,13 +51,13 @@ function extendAddFunction(addDefinition) {
   };
 }
 
-buildDomConstantsObject = function(domConstantsDefinition) {
+buildDomConstantsObject = function(options) {
   var domConstant;
 
-  domConstant = buildConstantsObject(domConstantsDefinition);
+  domConstant = buildConstantsObject(options);
 
   extendAddFunction({
-    selectorSymbol: domConstantsDefinition.selectorSymbol,
+    selectorSymbol: options.selectorSymbol,
     constantsBase: domConstant
   });
 

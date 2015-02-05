@@ -2,10 +2,10 @@
 
 var dictionary, build;
 
-dictionary = require('../helpers/dictionary');
+dictionary = require('dictionary');
 
 build = function() {
-  var events = dictionary.createNameValueObject({
+  var events = dictionary.build({
     dictionaryName: 'events'
   });
 
