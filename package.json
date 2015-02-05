@@ -27,7 +27,7 @@
     "browserify-shim": "^3.8.2",
     "complexity-report": "^1.1.1",
     "del": "^1.1.1",
-    "dictionary.js": "git://github.com/rclanan/dictionary.js",
+    "dictionary": "git://github.com/rclanan/dictionary",
     "gulp": "^3.8.10",
     "gulp-changed": "^1.1.0",
     "gulp-clean": "^0.3.1",
@@ -61,5 +61,6 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
-  }
+  },
+  "dependencies": {}
 }

@@ -21,7 +21,8 @@ module.exports = {
       template: src + '/_bundleTemplate.js',
       outputName: 'constants.js',
       require: [],
-      external: []
+      external: [],
+      noParse: ['/node_modules/dictionary/dist/dictionary.js']
     }]
   },
   production: {
