@@ -1,13 +1,17 @@
 (function(window, Builder) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD
-    define(Builder);
-  } else if (typeof exports === 'object') {
+  var builtExport = Builder();
+
+  if (typeof exports === 'object') {
     // CommonJS
-    module.exports = Builder();
+    module.exports = builtExport;
+  } if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(function(){
+      return builtExport;
+    });
   } else {
     // Browser Global (constants is your global library identifier)
-    window.constants = Builder();
+    window.constants = builtExport;
   }
 }(this, function() {
   var require, itemToExport;

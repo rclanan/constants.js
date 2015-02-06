@@ -27,7 +27,7 @@
     "browserify-shim": "^3.8.2",
     "complexity-report": "^1.1.1",
     "del": "^1.1.1",
-    "dictionary.js": "git://github.com/rclanan/dictionary.js",
+    "dictionary.js": "git://github.com/fusionalliance/dictionary.js",
     "gulp": "^3.8.10",
     "gulp-changed": "^1.1.0",
     "gulp-clean": "^0.3.1",

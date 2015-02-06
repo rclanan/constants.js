@@ -1,13 +1,17 @@
 (function(window, Builder) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD
-    define(Builder);
-  } else if (typeof exports === 'object') {
+  var builtExport = Builder();
+
+  if (typeof exports === 'object') {
     // CommonJS
-    module.exports = Builder();
+    module.exports = builtExport;
+  } if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(function(){
+      return builtExport;
+    });
   } else {
     // Browser Global (constants is your global library identifier)
-    window.constants = Builder();
+    window.constants = builtExport;
   }
 }(this, function() {
   var _conRq_, itemToExport;
@@ -45,12 +49,12 @@ module.exports = {
 
 },{"./definitions/attributes":3,"./definitions/cssClasses":4,"./definitions/events":5,"./definitions/ids":6,"./definitions/localizations":7,"./definitions/tags":8}],2:[function(_conRq_,module,exports){
 (function(window, Builder) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD
-    define(Builder);
-  } else if (typeof exports === 'object') {
+  if (typeof exports === 'object') {
     // CommonJS
     module.exports = Builder();
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(Builder);
   } else {
     // Browser Global (dictionary is your global library identifier)
     window.dictionary = Builder();
@@ -62,7 +66,7 @@ module.exports = {
   // located in gulp/config.js under "browserify"
   itemToExport = 1;
 
-  _dicRq_ = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dicRq_=="function"&&_dicRq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dicRq_=="function"&&_dicRq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dicRq_,module,exports){
+  _dicRq_ = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dicRq_=="function"&&_dicRq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dicRq_=="function"&&_dicRq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var storeManagerBuilder, dictionaryBuilder, buildDictionary;
@@ -88,18 +92,18 @@ buildDictionary = function(options) {
   return dictionaryBuilder.build(store);
 };
 
-module.exports = {
+_dcMd_.exports = {
   build: buildDictionary
 };
 
-},{"./dictionaryUtility/dictionaryBuilder":3,"./dictionaryUtility/store/storeManagerBuilder":12}],2:[function(_dicRq_,module,exports){
+},{"./dictionaryUtility/dictionaryBuilder":3,"./dictionaryUtility/store/storeManagerBuilder":12}],2:[function(_dicRq_,_dcMd_,exports){
 (function(window, Builder) {
-  if (typeof define === 'function' && define.amd) {
+  if (typeof exports === 'object') {
+    // CommonJS
+    _dcMd_.exports = Builder();
+  } else if (typeof define === 'function' && define.amd) {
     // AMD
     define(Builder);
-  } else if (typeof exports === 'object') {
-    // CommonJS
-    module.exports = Builder();
   } else {
     // Browser Global (strings is your global library identifier)
     window.strings = Builder();
@@ -111,16 +115,16 @@ module.exports = {
   // located in gulp/config.js under "browserify"
   itemToExport = 1;
 
-  _strRq_ = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _strRq_=="function"&&_strRq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _strRq_=="function"&&_strRq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_strRq_,module,exports){
+  _strRq_ = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _strRq_=="function"&&_strRq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _strRq_=="function"&&_strRq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_strRq_,_stMd_,exports){
 'use strict';
 
 var formatting = _strRq_('./utilities/formatting');
 
-module.exports = {
+_stMd_.exports = {
   format: formatting.format
 };
 
-},{"./utilities/formatting":2}],2:[function(_strRq_,module,exports){
+},{"./utilities/formatting":2}],2:[function(_strRq_,_stMd_,exports){
 'use strict';
 
 function format(stringToFormat, values) {
@@ -129,7 +133,7 @@ function format(stringToFormat, values) {
   });
 }
 
-module.exports = {
+_stMd_.exports = {
   format: format
 };
 
@@ -139,7 +143,7 @@ module.exports = {
 
   return _strRq_(itemToExport);
 }));
-},{}],3:[function(_dicRq_,module,exports){
+},{}],3:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 function buildDictionary(store) {
@@ -150,11 +154,11 @@ function buildDictionary(store) {
   return dictionary;
 }
 
-module.exports = {
+_dcMd_.exports = {
   build: buildDictionary
 };
 
-},{}],4:[function(_dicRq_,module,exports){
+},{}],4:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var nameExistsErrorDefinitionBuilder, valueExistsErrorDefinitionBuilder, reservedNameErrorDefinitionBuilder;
@@ -176,11 +180,11 @@ function addErrorHandling(options) {
   errorHandling.addReservedName = reservedNameErrorDefinition.addReservedName;
 }
 
-module.exports = {
+_dcMd_.exports = {
   addErrorHandling: addErrorHandling
 };
 
-},{"./dictionaryErrors/nameExistsErrorDefinitionBuilder":5,"./dictionaryErrors/reservedNameErrorDefinitionBuilder":6,"./dictionaryErrors/valueExistsErrorDefinitionBuilder":7}],5:[function(_dicRq_,module,exports){
+},{"./dictionaryErrors/nameExistsErrorDefinitionBuilder":5,"./dictionaryErrors/reservedNameErrorDefinitionBuilder":6,"./dictionaryErrors/valueExistsErrorDefinitionBuilder":7}],5:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var strings, nameExistsError;
@@ -211,11 +215,11 @@ function buildValueExistsErrorDefinition (store) {
   };
 }
 
-module.exports = {
+_dcMd_.exports = {
   build: buildValueExistsErrorDefinition
 };
 
-},{"strings.js":2}],6:[function(_dicRq_,module,exports){
+},{"strings.js":2}],6:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var strings, nameExistsError;
@@ -253,11 +257,11 @@ function buildReservedNameErrorDefinition (store) {
   };
 }
 
-module.exports = {
+_dcMd_.exports = {
   build: buildReservedNameErrorDefinition
 };
 
-},{"strings.js":2}],7:[function(_dicRq_,module,exports){
+},{"strings.js":2}],7:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var strings, valueExistsErrorText;
@@ -289,11 +293,11 @@ function buildValueExistsErrorDefinition (store) {
   };
 }
 
-module.exports = {
+_dcMd_.exports = {
   build: buildValueExistsErrorDefinition
 };
 
-},{"strings.js":2}],8:[function(_dicRq_,module,exports){
+},{"strings.js":2}],8:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 function throwRelevantError(errorValue, errorDefinitions) {
@@ -321,11 +325,11 @@ function buildErrorHandling(){
   return errorHandling;
 }
 
-module.exports = {
+_dcMd_.exports = {
   build: buildErrorHandling
 };
 
-},{}],9:[function(_dicRq_,module,exports){
+},{}],9:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var errorHandlingBuilder, dictionaryErrorHandling;
@@ -347,11 +351,11 @@ function addErrorHandling(options) {
   return options.store;
 }
 
-module.exports = {
+_dcMd_.exports = {
   addToStore: addErrorHandling
 };
 
-},{"../dictionaryErrorHandling":4,"../errorHandlingBuilder":8}],10:[function(_dicRq_,module,exports){
+},{"../dictionaryErrorHandling":4,"../errorHandlingBuilder":8}],10:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var storeErrorHandlingManager;
@@ -378,11 +382,11 @@ function buildDataStore(options) {
   return storeBase;
 }
 
-module.exports = {
+_dcMd_.exports = {
   build: buildDataStore
 };
 
-},{"./errorHandlingManager":9}],11:[function(_dicRq_,module,exports){
+},{"./errorHandlingManager":9}],11:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 function addSingle(nameValue, store) {
@@ -415,12 +419,12 @@ function addAll(nameValues, store) {
 
 }
 
-module.exports = {
+_dcMd_.exports = {
   addAll: addAll,
   addSingle: addSingle
 };
 
-},{}],12:[function(_dicRq_,module,exports){
+},{}],12:[function(_dicRq_,_dcMd_,exports){
 'use strict';
 
 var storeBuilder, storeManagement;
@@ -478,7 +482,7 @@ function buildstoreManager(options) {
   return store;
 }
 
-module.exports = {
+_dcMd_.exports = {
   build: buildstoreManager
 };
 
