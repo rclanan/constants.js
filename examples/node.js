@@ -6,7 +6,7 @@ constantsBuilder = require('../dist/constants.js');
 
 console.log(constantsBuilder);
 
-constants = constantsBuilder.buildConstantsObject();
+constants = constantsBuilder.build();
 
 TAGS = constants.tags;
 

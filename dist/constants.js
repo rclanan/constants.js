@@ -1,32 +1,32 @@
-(function(window, factory) {
+(function(window, Builder) {
   if (typeof define === 'function' && define.amd) {
     // AMD
-    define(factory);
+    define(Builder);
   } else if (typeof exports === 'object') {
     // CommonJS
-    module.exports = factory();
+    module.exports = Builder();
   } else {
     // Browser Global (constants is your global library identifier)
-    window.constants = factory();
+    window.constants = Builder();
   }
 }(this, function() {
-  var require, itemToExport;
+  var _conRq_, itemToExport;
 
   // this is the what is defined in browserify's "entry" item in the configBundles array.
   // located in gulp/config.js under "browserify"
   itemToExport = 1;
 
-  require = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+  _conRq_ = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _conRq_=="function"&&_conRq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _conRq_=="function"&&_conRq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_conRq_,module,exports){
 'use strict';
 
 var cssClasses, ids, attributes, tags, events, localizations, build;
 
-cssClasses = require('./definitions/cssClasses');
-ids = require('./definitions/ids');
-attributes = require('./definitions/attributes');
-tags = require('./definitions/tags');
-events = require('./definitions/events');
-localizations = require('./definitions/localizations');
+cssClasses = _conRq_('./definitions/cssClasses');
+ids = _conRq_('./definitions/ids');
+attributes = _conRq_('./definitions/attributes');
+tags = _conRq_('./definitions/tags');
+events = _conRq_('./definitions/events');
+localizations = _conRq_('./definitions/localizations');
 
 build = function() {
     return {
@@ -43,12 +43,457 @@ module.exports = {
   build: build
 };
 
-},{"./definitions/attributes":2,"./definitions/cssClasses":3,"./definitions/events":4,"./definitions/ids":5,"./definitions/localizations":6,"./definitions/tags":7}],2:[function(require,module,exports){
+},{"./definitions/attributes":3,"./definitions/cssClasses":4,"./definitions/events":5,"./definitions/ids":6,"./definitions/localizations":7,"./definitions/tags":8}],2:[function(_conRq_,module,exports){
+(function(window, Builder) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(Builder);
+  } else if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = Builder();
+  } else {
+    // Browser Global (dictionary is your global library identifier)
+    window.dictionary = Builder();
+  }
+}(this, function() {
+  var _dicRq_, itemToExport;
+
+  // this is the what is defined in browserify's "entry" item in the configBundles array.
+  // located in gulp/config.js under "browserify"
+  itemToExport = 1;
+
+  _dicRq_ = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dicRq_=="function"&&_dicRq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dicRq_=="function"&&_dicRq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dicRq_,module,exports){
+'use strict';
+
+var storeManagerBuilder, dictionaryBuilder, buildDictionary;
+
+storeManagerBuilder = _dicRq_('./dictionaryUtility/store/storeManagerBuilder');
+dictionaryBuilder = _dicRq_('./dictionaryUtility/dictionaryBuilder');
+
+buildDictionary = function(options) {
+  var store, getValueKey;
+
+  options.reservedNames = options.reservedNames ? options.reservedNames : [];
+
+  getValueKey = options.valueKeyFunction || function(nameValue) {
+    return nameValue.value;
+  };
+
+  store = storeManagerBuilder.build({
+    getValueKey: getValueKey
+  });
+
+  options.reservedNames.forEach(store.addReservedName);
+
+  return dictionaryBuilder.build(store);
+};
+
+module.exports = {
+  build: buildDictionary
+};
+
+},{"./dictionaryUtility/dictionaryBuilder":3,"./dictionaryUtility/store/storeManagerBuilder":12}],2:[function(_dicRq_,module,exports){
+(function(window, Builder) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(Builder);
+  } else if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = Builder();
+  } else {
+    // Browser Global (strings is your global library identifier)
+    window.strings = Builder();
+  }
+}(this, function() {
+  var _strRq_, itemToExport;
+
+  // this is the what is defined in browserify's "entry" item in the configBundles array.
+  // located in gulp/config.js under "browserify"
+  itemToExport = 1;
+
+  _strRq_ = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _strRq_=="function"&&_strRq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _strRq_=="function"&&_strRq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_strRq_,module,exports){
+'use strict';
+
+var formatting = _strRq_('./utilities/formatting');
+
+module.exports = {
+  format: formatting.format
+};
+
+},{"./utilities/formatting":2}],2:[function(_strRq_,module,exports){
+'use strict';
+
+function format(stringToFormat, values) {
+  return stringToFormat.replace(/{(\w+)}/g, function(match, value) {
+    return (values[value] !== undefined) ? values[value] : match;
+  });
+}
+
+module.exports = {
+  format: format
+};
+
+},{}]},{},[1]);
+
+//# sourceMappingURL=strings.js.map;
+
+  return _strRq_(itemToExport);
+}));
+},{}],3:[function(_dicRq_,module,exports){
+'use strict';
+
+function buildDictionary(store) {
+  var dictionary = Object.create(store.data.nameValueMap);
+
+  dictionary.$add = store.add;
+
+  return dictionary;
+}
+
+module.exports = {
+  build: buildDictionary
+};
+
+},{}],4:[function(_dicRq_,module,exports){
+'use strict';
+
+var nameExistsErrorDefinitionBuilder, valueExistsErrorDefinitionBuilder, reservedNameErrorDefinitionBuilder;
+
+nameExistsErrorDefinitionBuilder = _dicRq_('./dictionaryErrors/nameExistsErrorDefinitionBuilder');
+valueExistsErrorDefinitionBuilder = _dicRq_('./dictionaryErrors/valueExistsErrorDefinitionBuilder');
+reservedNameErrorDefinitionBuilder = _dicRq_('./dictionaryErrors/reservedNameErrorDefinitionBuilder');
+
+function addErrorHandling(options) {
+  var errorHandling, reservedNameErrorDefinition;
+
+  reservedNameErrorDefinition = reservedNameErrorDefinitionBuilder.build(options.store);
+
+  errorHandling = options.errorHandling;
+  errorHandling.addErrorDefinition(nameExistsErrorDefinitionBuilder.build(options.store));
+  errorHandling.addErrorDefinition(valueExistsErrorDefinitionBuilder.build(options.store));
+  errorHandling.addErrorDefinition(reservedNameErrorDefinition);
+
+  errorHandling.addReservedName = reservedNameErrorDefinition.addReservedName;
+}
+
+module.exports = {
+  addErrorHandling: addErrorHandling
+};
+
+},{"./dictionaryErrors/nameExistsErrorDefinitionBuilder":5,"./dictionaryErrors/reservedNameErrorDefinitionBuilder":6,"./dictionaryErrors/valueExistsErrorDefinitionBuilder":7}],5:[function(_dicRq_,module,exports){
+'use strict';
+
+var strings, nameExistsError;
+
+strings = _dicRq_('strings.js');
+
+nameExistsError = 'name "{name}" is already in use, value is {value}';
+
+function buildNameExistsError(nameValue, store) {
+  var errorText = strings.format(nameExistsError,
+  {
+    name: nameValue.name,
+    value: store.getValueKey(nameValue)
+  });
+
+  return new Error(errorText);
+}
+
+function nameExistsErrorCondition(nameValue, store) {
+  return !!store.nameValueMap[nameValue.name];
+}
+
+function buildValueExistsErrorDefinition (store) {
+  return {
+    errorName: 'nameExists',
+    errorCondition: function(nameValue) { return nameExistsErrorCondition(nameValue, store); },
+    errorBuilder: function(nameValue) { return buildNameExistsError(nameValue, store); }
+  };
+}
+
+module.exports = {
+  build: buildValueExistsErrorDefinition
+};
+
+},{"strings.js":2}],6:[function(_dicRq_,module,exports){
+'use strict';
+
+var strings, nameExistsError;
+
+strings = _dicRq_('strings.js');
+
+nameExistsError = 'name "{name}" is reserved for {type} dictionary';
+
+function buildNameReservedError(nameValue, store) {
+  var errorText = strings.format(nameExistsError,
+  {
+    name: nameValue.name,
+    type: store.dictionaryName
+  });
+
+  return new Error(errorText);
+}
+
+function nameReservedErrorCondition(nameValue, reservedNames) {
+  return !!reservedNames[nameValue.name];
+}
+
+function addReservedName(name, reservedNames) {
+  reservedNames[name] = true;
+}
+
+function buildReservedNameErrorDefinition (store) {
+  var reservedNames = {};
+
+  return {
+    errorName: 'nameReserved',
+    errorCondition: function(nameValue) { return nameReservedErrorCondition(nameValue, reservedNames); },
+    errorBuilder: function(nameValue) { return buildNameReservedError(nameValue, store); },
+    addReservedName: function(name) { addReservedName(name, reservedNames); }
+  };
+}
+
+module.exports = {
+  build: buildReservedNameErrorDefinition
+};
+
+},{"strings.js":2}],7:[function(_dicRq_,module,exports){
+'use strict';
+
+var strings, valueExistsErrorText;
+
+strings = _dicRq_('strings.js');
+
+valueExistsErrorText = 'given name {givenName} with a value of "{value}" already exists with a name of "{name}"';
+
+function buildValueExistsError(nameValue, store) {
+  var errorText = strings.format(valueExistsErrorText,
+  {
+    givenName: nameValue.name,
+    name: store.valueNameMap[store.getValueKey(nameValue)],
+    value: store.getValueKey(nameValue)
+  });
+
+  return new Error(errorText);
+}
+
+function valueExistsErrorCondition(nameValue, store) {
+  return !!store.valueNameMap[nameValue.value];
+}
+
+function buildValueExistsErrorDefinition (store) {
+  return {
+    errorName: 'valueExists',
+    errorCondition: function(nameValue) { return valueExistsErrorCondition(nameValue, store); },
+    errorBuilder: function(nameValue) { return buildValueExistsError(nameValue, store); }
+  };
+}
+
+module.exports = {
+  build: buildValueExistsErrorDefinition
+};
+
+},{"strings.js":2}],8:[function(_dicRq_,module,exports){
+'use strict';
+
+function throwRelevantError(errorValue, errorDefinitions) {
+  errorDefinitions.forEach(function (errorDefinition){
+    if(errorDefinition.condition(errorValue)) {
+      throw new Error(errorDefinition.buildError(errorValue));
+    }
+  });
+}
+
+function addErrorDefinition(errorDefinition, errorDefinitions) {
+  errorDefinitions.push({
+    condition: errorDefinition.errorCondition,
+    buildError: errorDefinition.errorBuilder
+  });
+}
+
+function buildErrorHandling(){
+  var errorHandling = {
+    errorDefinitions: [],
+    addErrorDefinition: function(errorDefinition){ addErrorDefinition( errorDefinition, errorHandling.errorDefinitions); },
+    throwRelevantError: function(errorValue) { throwRelevantError(errorValue, errorHandling.errorDefinitions);}
+  };
+
+  return errorHandling;
+}
+
+module.exports = {
+  build: buildErrorHandling
+};
+
+},{}],9:[function(_dicRq_,module,exports){
+'use strict';
+
+var errorHandlingBuilder, dictionaryErrorHandling;
+
+errorHandlingBuilder = _dicRq_('../errorHandlingBuilder');
+dictionaryErrorHandling = _dicRq_('../dictionaryErrorHandling');
+
+function addErrorHandling(options) {
+  var errorHandling = errorHandlingBuilder.build();
+
+  dictionaryErrorHandling.addErrorHandling({
+    store: options.store,
+    dictionaryObjectName: options.dictionaryObjectName,
+    errorHandling: errorHandling
+  });
+
+  options.store.errorHandling = errorHandling;
+
+  return options.store;
+}
+
+module.exports = {
+  addToStore: addErrorHandling
+};
+
+},{"../dictionaryErrorHandling":4,"../errorHandlingBuilder":8}],10:[function(_dicRq_,module,exports){
+'use strict';
+
+var storeErrorHandlingManager;
+
+storeErrorHandlingManager = _dicRq_('./errorHandlingManager');
+
+function buildDataStore(options) {
+  var storeBase;
+
+  storeBase = {
+    dictionaryName: options.dictionaryName,
+    nameValueMap: {},
+    valueNameMap: {},
+    getValueKey: options.getValueKey
+  };
+
+  storeBase = storeErrorHandlingManager.addToStore({
+    store: storeBase,
+    errorHandling: storeBase.errorHandling
+  });
+
+  storeBase.errorHandling.addReservedName('$add');
+
+  return storeBase;
+}
+
+module.exports = {
+  build: buildDataStore
+};
+
+},{"./errorHandlingManager":9}],11:[function(_dicRq_,module,exports){
+'use strict';
+
+function addSingle(nameValue, store) {
+  var nameValueMap, valueNameMap;
+
+  nameValueMap = store.nameValueMap;
+  valueNameMap = store.valueNameMap;
+
+  nameValueMap[nameValue.name] = nameValue.value;
+  valueNameMap[store.getValueKey(nameValue)] = nameValue.name;
+}
+
+function checkAddSingle(options) {
+  options.errorHandling.throwRelevantError(options.nameValue);
+  addSingle(options.nameValue, options.store);
+}
+
+function addAll(nameValues, store) {
+  var keys;
+
+  keys = Object.keys(nameValues);
+
+  keys.forEach(function(name) {
+    checkAddSingle({
+      errorHandling: store.errorHandling,
+      store: store,
+      nameValue: { name: name, value: nameValues[name]}
+    });
+  });
+
+}
+
+module.exports = {
+  addAll: addAll,
+  addSingle: addSingle
+};
+
+},{}],12:[function(_dicRq_,module,exports){
+'use strict';
+
+var storeBuilder, storeManagement;
+
+storeBuilder = _dicRq_('./storeBuilder');
+storeManagement = _dicRq_('./storeManagement');
+
+function addPropertyErrorHandling(options) {
+  Object.defineProperty(options.store,
+    'errorHandling',
+    {
+      enumerable: false,
+      configurable: false,
+      get: function() { return options.storeBase.errorHandling; }
+    });
+}
+
+function addPropertyAddReservedName(options) {
+  Object.defineProperty(options.store,
+    'addReservedName',
+    {
+      enumerable: false,
+      configurable: false,
+      get: function() { return options.storeBase.errorHandling.addReservedName; }
+    });
+}
+
+function addProperties(options) {
+  addPropertyErrorHandling(options);
+  addPropertyAddReservedName(options);
+}
+
+function createStore(storeBase) {
+  var store;
+
+  store = {
+    add: function(nameValues) { storeManagement.addAll(nameValues, storeBase); },
+    data: storeBase
+  };
+
+  return store;
+}
+
+function buildstoreManager(options) {
+  var storeBase, store;
+
+  storeBase = storeBuilder.build(options);
+  store = createStore(storeBase);
+
+  addProperties({
+    store: store,
+    storeBase: storeBase
+  });
+
+  return store;
+}
+
+module.exports = {
+  build: buildstoreManager
+};
+
+},{"./storeBuilder":10,"./storeManagement":11}]},{},[1]);
+
+//# sourceMappingURL=dictionary.js.map;
+
+  return _dicRq_(itemToExport);
+}));
+},{}],3:[function(_conRq_,module,exports){
 'use strict';
 
 var dictionary, build;
 
-dictionary = require('../helpers/constantsDictionary');
+dictionary = _conRq_('dictionary.js');
 
 build = function() {
     var attributes = dictionary.build({
@@ -259,16 +704,16 @@ module.exports = {
   build: build
 };
 
-},{"../helpers/constantsDictionary":8}],3:[function(require,module,exports){
+},{"dictionary.js":2}],4:[function(_conRq_,module,exports){
 'use strict';
 
 var domConstants, build;
 
-domConstants = require('../helpers/domConstants');
+domConstants = _conRq_('../helpers/domConstants');
 
 build = function() {
   var classes = domConstants.build({
-    constantsObjectName: 'cssClasses',
+    dictionaryName: 'cssClasses',
     selectorSymbol: '.'
   });
 
@@ -284,15 +729,15 @@ module.exports = {
   build:build
 };
 
-},{"../helpers/domConstants":19}],4:[function(require,module,exports){
+},{"../helpers/domConstants":9}],5:[function(_conRq_,module,exports){
 'use strict';
 
 var dictionary, build;
 
-dictionary = require('../helpers/constantsDictionary');
+dictionary = _conRq_('dictionary.js');
 
 build = function() {
-  var events = dictionary.createNameValueObject({
+  var events = dictionary.build({
     dictionaryName: 'events'
   });
 
@@ -373,12 +818,12 @@ module.exports = {
   build:build
 };
 
-},{"../helpers/constantsDictionary":8}],5:[function(require,module,exports){
+},{"dictionary.js":2}],6:[function(_conRq_,module,exports){
 'use strict';
 
 var domConstants, build;
 
-domConstants = require('./../helpers/domConstants');
+domConstants = _conRq_('./../helpers/domConstants');
 
 build = function() {
   var ids = domConstants.build({
@@ -395,12 +840,12 @@ module.exports = {
   build:build
 };
 
-},{"./../helpers/domConstants":19}],6:[function(require,module,exports){
+},{"./../helpers/domConstants":9}],7:[function(_conRq_,module,exports){
 'use strict';
 
 var dictionary, build;
 
-dictionary = require('../helpers/constantsDictionary');
+dictionary = _conRq_('dictionary.js');
 
 function buildLocalizationValue(localizationValue, baseDictionary) {
   return {
@@ -415,15 +860,14 @@ function extendAddFunction(baseDictionary) {
   superAdd = baseDictionary.$add;
 
   baseDictionary.$add = function(nameValues) {
-    var givenValues, localizationName;
+    var givenValues, nameValueNames;
 
     givenValues = {};
+    nameValueNames = Object.keys(nameValues);
 
-    for (localizationName in nameValues) {
-      if (nameValues.hasOwnProperty(localizationName)) {
-        givenValues[localizationName] = buildLocalizationValue(nameValues[localizationName], baseDictionary);
-      }
-    }
+    nameValueNames.forEach(function(localizationName) {
+      givenValues[localizationName] = buildLocalizationValue(nameValues[localizationName], baseDictionary);
+    });
 
     superAdd(givenValues);
   };
@@ -436,7 +880,7 @@ build = function() {
   // to change or set getLocalizedValue at a later time after adding the localization value.
   localizations = dictionary.build({
     dictionaryName: 'localizations',
-    reservedWords: ['$setGetLocalizedValueFunction', '$getLocalizedValue'],
+    reservedNames: ['$setGetLocalizedValueFunction', '$getLocalizedValue'],
     valueKeyFunction: function(nameValue) {
         return nameValue.value.name;
       }
@@ -459,12 +903,12 @@ module.exports = {
   extendAddFunction: extendAddFunction
 };
 
-},{"../helpers/constantsDictionary":8}],7:[function(require,module,exports){
+},{"dictionary.js":2}],8:[function(_conRq_,module,exports){
 'use strict';
 
 var dictionary, build;
 
-dictionary = require('../helpers/constantsDictionary');
+dictionary = _conRq_('dictionary.js');
 
 function buildHtmlTagValue(tagName, baseConstantsObject) {
   var html = '<' + tagName + ' />';
@@ -484,16 +928,14 @@ function extendAddFunction(baseConstantsObject) {
 
   baseConstantsObject.$add = function(nameValues) {
     // we should be able to simply add the name, img, div, span, then make a tag out of it.
-    var givenValues, tagName;
+    var givenValues, nameValueNames;
 
     givenValues = {};
-    tagName = {};
+    nameValueNames = Object.keys(nameValues);
 
-    for (tagName in nameValues) {
-      if (nameValues.hasOwnProperty(tagName)) {
-        givenValues[tagName] = buildHtmlTagValue(nameValues[tagName], baseConstantsObject);
-      }
-    }
+    nameValueNames.forEach(function(tagName) {
+      givenValues[tagName] = buildHtmlTagValue(nameValues[tagName], baseConstantsObject);
+    });
 
     superAdd(givenValues);
   };
@@ -622,7 +1064,7 @@ build = function() {
 
   tags = dictionary.build({
     dictionaryName: 'tags',
-    reservedWords: ['$elementBuilder', '$setElementBuilderFunction'],
+    reservedNames: ['$elementBuilder', '$setElementBuilderFunction'],
     valueKeyFunction: function(nameValue) {
       return nameValue.value.name;
     }
@@ -646,392 +1088,22 @@ module.exports = {
   addHtmlTags: addHtmlTags
 };
 
-},{"../helpers/constantsDictionary":8}],8:[function(require,module,exports){
+},{"dictionary.js":2}],9:[function(_conRq_,module,exports){
 'use strict';
 
-var constantsStoreManager, constantsDictionaryFactory, createDictionary;
+var dictionary, buildDomConstantsObject;
 
-constantsStoreManager = require('./constantsDictionaryUtility/constantsStore/constantsStoreManager');
-// needs a better name.
-constantsDictionaryFactory = require('./constantsDictionaryUtility/constantsDictionaryFactory');
+dictionary = _conRq_('dictionary.js');
 
-createDictionary = function(options) {
-  var constantsStore, getValueKey;
+function buildConstantsObject(options) {
+  var domConstants, reservedNames;
 
-  options.reservedWords = options.reservedWords ? options.reservedWords : [];
+  reservedNames = options.reservedNames ? options.reservedNames : [];
+  reservedNames.push('$setFindElementsFunction');
 
-  getValueKey = options.valueKeyFunction || function(nameValue) {
-    return nameValue.value;
-  };
-
-  constantsStore = constantsStoreManager.build({
-    getValueKey: getValueKey
-  });
-
-  options.reservedWords.forEach(constantsStore.addReservedName);
-
-  return constantsDictionaryFactory.build(constantsStore);
-};
-
-
-module.exports = {
-  build: createDictionary
-};
-
-},{"./constantsDictionaryUtility/constantsDictionaryFactory":13,"./constantsDictionaryUtility/constantsStore/constantsStoreManager":15}],9:[function(require,module,exports){
-'use strict';
-
-var nameExistsErrorDefinitionFactory, valueExistsErrorDefinitionFactory, reservedNameErrorDefinitionFactory;
-
-nameExistsErrorDefinitionFactory = require('./constantsDictionaryErrors/nameExistsErrorDefinitionFactory');
-valueExistsErrorDefinitionFactory = require('./constantsDictionaryErrors/valueExistsErrorDefinitionFactory');
-reservedNameErrorDefinitionFactory = require('./constantsDictionaryErrors/reservedNameErrorDefinitionFactory');
-
-
-function addErrorHandling(options) {
-  var errorHandling = options.errorHandling;
-
-  var reservedNameErrorDefinition = reservedNameErrorDefinitionFactory.build(options.constantsStore);
-
-  errorHandling.addErrorDefinition(nameExistsErrorDefinitionFactory.build(options.constantsStore));
-  errorHandling.addErrorDefinition(valueExistsErrorDefinitionFactory.build(options.constantsStore));
-  errorHandling.addErrorDefinition(reservedNameErrorDefinition);
-
-  errorHandling.addReservedName = reservedNameErrorDefinition.addReservedName;
-}
-
-
-module.exports = {
-  addErrorHandling: addErrorHandling
-};
-
-},{"./constantsDictionaryErrors/nameExistsErrorDefinitionFactory":10,"./constantsDictionaryErrors/reservedNameErrorDefinitionFactory":11,"./constantsDictionaryErrors/valueExistsErrorDefinitionFactory":12}],10:[function(require,module,exports){
-'use strict';
-var stringFormatter, nameExistsError;
-
-stringFormatter = require('../../stringFormatter');
-
-nameExistsError = 'name "{name}" is already in use, value is {value}';
-
-
-function buildNameExistsError(nameValue, constantsStore) {
-  var errorText = stringFormatter.format(nameExistsError,
-    {
-      name: nameValue.name,
-      value: constantsStore.getValueKey(nameValue)
-    });
-
-    return new Error(errorText);
-  }
-
-
-  function nameExistsErrorCondition(nameValue, constantsStore) {
-    return !!constantsStore.nameValueMap[nameValue.name];
-  }
-
-  function buildValueExistsErrorDefinition (constantsStore) {
-    return {
-      errorName: 'nameExists',
-      errorCondition: function(nameValue) { return nameExistsErrorCondition(nameValue, constantsStore); },
-      errorBuilder: function(nameValue) { return buildNameExistsError(nameValue, constantsStore); }
-    };
-  }
-
-  module.exports = {
-    build: buildValueExistsErrorDefinition
-  };
-
-},{"../../stringFormatter":20}],11:[function(require,module,exports){
-'use strict';
-var stringFormatter, nameExistsError;
-
-stringFormatter = require('../../stringFormatter');
-
-nameExistsError = 'name "{name}" is reserved for {type} constants dictionary';
-
-
-function buildNameReservedError(nameValue, constantsStore) {
-  var errorText = stringFormatter.format(nameExistsError,
-    {
-      name: nameValue.name,
-      type: constantsStore.constantsDictionaryName
-    });
-
-    return new Error(errorText);
-  }
-
-
-  function nameReservedErrorCondition(nameValue, reservedNames) {
-    return !!reservedNames[nameValue.name];
-  }
-
-  function addReservedName(name, reservedNames) {
-    reservedNames[name] = true;
-  }
-
-  function buildReservedNameErrorDefinition (constantsStore) {
-    var reservedNames = {};
-    return {
-      errorName: 'nameReserved',
-      errorCondition: function(nameValue) { return nameReservedErrorCondition(nameValue, reservedNames); },
-      errorBuilder: function(nameValue) { return buildNameReservedError(nameValue, constantsStore); },
-      addReservedName: function(name) { addReservedName(name, reservedNames); }
-    };
-  }
-
-  module.exports = {
-    build: buildReservedNameErrorDefinition
-  };
-
-},{"../../stringFormatter":20}],12:[function(require,module,exports){
-'use strict';
-var stringFormatter, valueExistsErrorText;
-
-stringFormatter = require('../../stringFormatter');
-
-valueExistsErrorText = 'given name {givenName} with a value of "{value}" already exists with a name of "{name}"';
-
-
-function buildValueExistsError(nameValue, constantsStore) {
-  var errorText = stringFormatter.format(valueExistsErrorText,
-    {
-      givenName: nameValue.name,
-      name: constantsStore.valueNameMap[constantsStore.getValueKey(nameValue)],
-      value: constantsStore.getValueKey(nameValue)
-    });
-
-  return new Error(errorText);
-}
-
-
-function valueExistsErrorCondition(nameValue, constantsStore) {
-  return !!constantsStore.valueNameMap[nameValue.value];
-}
-
-function buildValueExistsErrorDefinition (constantsStore) {
-  return {
-    errorName: 'valueExists',
-    errorCondition: function(nameValue) { return valueExistsErrorCondition(nameValue, constantsStore); },
-    errorBuilder: function(nameValue) { return buildValueExistsError(nameValue, constantsStore); }
-  };
-}
-
-module.exports = {
-  build: buildValueExistsErrorDefinition
-};
-
-},{"../../stringFormatter":20}],13:[function(require,module,exports){
-'use strict';
-
-function buildDictionary(constantsStore) {
-  var dictionary = Object.create(constantsStore.data.nameValueMap);
-  dictionary.$add = constantsStore.add;
-
-  return dictionary;
-}
-
-module.exports = {
-  build: buildDictionary
-};
-
-},{}],14:[function(require,module,exports){
-'use strict';
-
-var constantsStoreErrorHandlingManager;
-
-constantsStoreErrorHandlingManager = require('./errorHandlingManager');
-
-function buildDataStore(options) {
-  var storeBase;
-
-  storeBase = {
-    nameValueMap: {},
-    valueNameMap: {},
-    getValueKey: options.getValueKey
-  };
-
-  storeBase = constantsStoreErrorHandlingManager.addToStore({
-    store: storeBase,
-    constantsObjectName: options.constantsObjectName,
-    errorHandling: storeBase.errorHandling
-  });
-
-  storeBase.errorHandling.addReservedName('$add');
-
-  return storeBase;
-}
-
-module.exports = {
-  build: buildDataStore
-};
-
-},{"./errorHandlingManager":16}],15:[function(require,module,exports){
-'use strict';
-
-var constantsStoreFactory, storeManagement;
-
-constantsStoreFactory = require('./constantsStoreFactory');
-storeManagement = require('./storeManagement');
-
-function addPropertyErrorHandling(options) {
-  Object.defineProperty(options.constantsStore,
-    'errorHandling',
-    {
-      enumerable: false,
-      configurable: false,
-      get: function() { return options.storeBase.errorHandling; }
-    });
-}
-
-function addPropertyAddReservedName(options) {
-  Object.defineProperty(options.constantsStore,
-    'addReservedName',
-    {
-      enumerable: false,
-      configurable: false,
-      get: function() { return options.storeBase.errorHandling.addReservedName; }
-    });
-}
-
-function addProperties(options) {
-  addPropertyErrorHandling(options);
-  addPropertyAddReservedName(options);
-}
-
-function createStore(storeBase) {
-  var constantsStore;
-
-  constantsStore = {
-    add: function(nameValues) { storeManagement.addAll(nameValues, storeBase); },
-    data: storeBase
-  };
-
-  return constantsStore;
-}
-
-function buildConstantsStoreManager(options) {
-  var storeBase, constantsStore;
-
-  storeBase = constantsStoreFactory.build(options);
-  constantsStore = createStore(storeBase);
-
-  addProperties({
-    constantsStore: constantsStore,
-    storeBase: storeBase
-  });
-
-  return constantsStore;
-}
-
-module.exports = {
-  build: buildConstantsStoreManager
-};
-
-},{"./constantsStoreFactory":14,"./storeManagement":17}],16:[function(require,module,exports){
-'use strict';
-
-var errorHandlingFactory, constantsDictionaryErrorHandling;
-
-errorHandlingFactory = require('../errorHandlingFactory');
-constantsDictionaryErrorHandling = require('../constantsDictionaryErrorHandling');
-
-function addErrorHandling(options) {
-
-  var errorHandling = errorHandlingFactory.build();
-
-  constantsDictionaryErrorHandling.addErrorHandling({
-    constantsStore: options.store,
-    constantsObjectName: options.constantsObjectName,
-    errorHandling: errorHandling
-  });
-
-  options.store.errorHandling = errorHandling;
-
-  return options.store;
-}
-
-module.exports = {
-  addToStore: addErrorHandling
-};
-
-},{"../constantsDictionaryErrorHandling":9,"../errorHandlingFactory":18}],17:[function(require,module,exports){
-'use strict';
-
-function addSingle(nameValue, constantsStore) {
-  var nameValueMap, valueNameMap;
-
-  nameValueMap = constantsStore.nameValueMap;
-  valueNameMap = constantsStore.valueNameMap;
-
-  nameValueMap[nameValue.name] = nameValue.value;
-  valueNameMap[constantsStore.getValueKey(nameValue)] = nameValue.name;
-}
-
-function addAll(nameValues, constantsStore) {
-  var name, nameValue;
-
-  for (name in nameValues) {
-    nameValue = {name: name, value: nameValues[name]};
-
-    if (nameValues.hasOwnProperty(name)) {
-      constantsStore.errorHandling.throwRelevantError(nameValue);
-      addSingle({name: name, value: nameValues[name]}, constantsStore);
-    }
-  }
-}
-
-module.exports = {
-  addAll: addAll,
-  addSingle: addSingle
-};
-
-},{}],18:[function(require,module,exports){
-'use strict';
-
-function throwRelevantError(errorValue, errorDefinitions) {
-  errorDefinitions.forEach(function (errorDefinition){
-    if(errorDefinition.condition(errorValue)) {
-      throw new Error(errorDefinition.buildError(errorValue));
-    }
-  });
-}
-
-function addErrorDefinition(errorDefinition, errorDefinitions) {
-  errorDefinitions.push({
-    condition: errorDefinition.errorCondition,
-    buildError: errorDefinition.errorBuilder
-  });
-}
-
-function buildErrorHandling(){
-  var errorHandling = {
-    errorDefinitions: [],
-    addErrorDefinition: function(errorDefinition){ addErrorDefinition( errorDefinition, errorHandling.errorDefinitions); },
-    throwRelevantError: function(errorValue) { throwRelevantError(errorValue, errorHandling.errorDefinitions);}
-  };
-  return errorHandling;
-}
-
-module.exports = {
-  build: buildErrorHandling
-};
-
-},{}],19:[function(require,module,exports){
-'use strict';
-
-var nameValueObject, buildDomConstantsObject;
-
-nameValueObject = require('./constantsDictionary');
-
-function buildConstantsObject(domConstantsDefinition) {
-  var domConstants, reservedWords;
-
-  reservedWords = domConstantsDefinition.reservedWorlds ? domConstantsDefinition.reservedWorlds : [];
-  reservedWords.push('$setFindElementsFunction');
-
-  domConstants = nameValueObject.createNameValueObject({
-    reservedWords: reservedWords,
-    constantsObjectName: domConstantsDefinition.constantsObjectName,
+  domConstants = dictionary.build({
+    reservedNames: reservedNames,
+    dictionaryName: options.dictionaryName,
     valueKeyFunction: function(nameValue) {
       return nameValue.value.name;
     }
@@ -1056,27 +1128,27 @@ function extendAddFunction(addDefinition) {
   var superAdd = addDefinition.constantsBase.$add;
 
   addDefinition.constantsBase.$add = function(nameValues) {
-    var domName, valuesToAdd;
+    var valuesToAdd, nameValueNames;
 
     valuesToAdd = {};
 
-    for (domName in nameValues) {
-      if (nameValues.hasOwnProperty(domName)) {
-        valuesToAdd[domName] = createDomValue(nameValues[domName], addDefinition.constantsBase, addDefinition.selectorSymbol);
-      }
-    }
+    nameValueNames = Object.keys(nameValues);
+
+    nameValueNames.forEach(function(domName){
+      valuesToAdd[domName] = createDomValue(nameValues[domName], addDefinition.constantsBase, addDefinition.selectorSymbol);
+    });
 
     superAdd(valuesToAdd);
   };
 }
 
-buildDomConstantsObject = function(domConstantsDefinition) {
+buildDomConstantsObject = function(options) {
   var domConstant;
 
-  domConstant = buildConstantsObject(domConstantsDefinition);
+  domConstant = buildConstantsObject(options);
 
   extendAddFunction({
-    selectorSymbol: domConstantsDefinition.selectorSymbol,
+    selectorSymbol: options.selectorSymbol,
     constantsBase: domConstant
   });
 
@@ -1088,37 +1160,14 @@ buildDomConstantsObject = function(domConstantsDefinition) {
 };
 
 module.exports = {
-  buildDomConstantsObject: buildDomConstantsObject,
+  build: buildDomConstantsObject,
   extendAddFunction: extendAddFunction,
   createDomValue: createDomValue
 };
 
-},{"./constantsDictionary":8}],20:[function(require,module,exports){
-'use strict';
-
-/*
-example:
-var format = 'this is test {testGiven} for a showing how to use {name}';
-var formattedString = format(fomat, {
-  testGiven: 'stringFormatter',
-  name: 'format'
-});
- */
-
-//TODO: Evaluate if there is a need to pull this into it's own library? Perhaps if we get more utility functions
-function format(stringToFormat, values) {
-  return stringToFormat.replace(/{(\w+)}/g, function(match, value) {
-    return (values[value] !== undefined) ? values[value] : match;
-  });
-}
-
-module.exports = {
-  format: format
-};
-
-},{}]},{},[1]);
+},{"dictionary.js":2}]},{},[1]);
 
 //# sourceMappingURL=constants.js.map;
 
-  return require(itemToExport);
+  return _conRq_(itemToExport);
 }));
