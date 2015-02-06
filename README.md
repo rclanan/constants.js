@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/fusionalliance/constants.js.png?label=ready&title=Ready)](https://waffle.io/fusionalliance/constants.js) [![Build Status](https://travis-ci.org/rclanan/constants.js.svg)](https://travis-ci.org/rclanan/constants.js)
+[![Stories in Ready](https://badge.waffle.io/fusionalliance/constants.js.png?label=ready&title=Ready)](https://waffle.io/fusionalliance/constants.js) [![Build Status](https://travis-ci.org/fusionalliance/constants.js.svg)](https://travis-ci.org/fusionalliance/constants.js)
 # constants.js
 
 constants handling library for JavaScript
