@@ -22,7 +22,7 @@ module.exports = {
       outputName: 'constants.js',
       require: [],
       external: [],
-      noParse: ['/node_modules/dictionary/dist/dictionary.js']
+      noParse: ['/node_modules/dictionary.js/dist/dictionary.js']
     }]
   },
   production: {

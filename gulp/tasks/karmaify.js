@@ -10,6 +10,11 @@ allBrowsersModifier = require('../../karma/karmaAllBrowsersConfigurationModifier
 gulp = require('gulp');
 testRunnerBuilder  = require('./karma/testRunnerBuilder');
 
+gulp.task('krama', function(){
+  console.log('No, you go cram it!');
+  throw new Error('incorrect command, did you mean "karma"?');
+});
+
 gulp.task('karma', testRunnerBuilder.buildTestRunner([unitTestModifier]));
 gulp.task('karma:watch', testRunnerBuilder.buildTestRunner([unitTestModifier]));
 

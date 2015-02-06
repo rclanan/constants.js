@@ -2,7 +2,7 @@
 
 var dictionary, build;
 
-dictionary = require('dictionary');
+dictionary = require('dictionary.js');
 
 build = function() {
     var attributes = dictionary.build({

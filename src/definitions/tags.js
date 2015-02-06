@@ -2,7 +2,7 @@
 
 var dictionary, build;
 
-dictionary = require('dictionary');
+dictionary = require('dictionary.js');
 
 function buildHtmlTagValue(tagName, baseConstantsObject) {
   var html = '<' + tagName + ' />';
@@ -22,11 +22,12 @@ function extendAddFunction(baseConstantsObject) {
 
   baseConstantsObject.$add = function(nameValues) {
     // we should be able to simply add the name, img, div, span, then make a tag out of it.
-    var givenValues;
+    var givenValues, nameValueNames;
 
     givenValues = {};
+    nameValueNames = Object.keys(nameValues);
 
-    nameValues.forEach(function(tagName) {
+    nameValueNames.forEach(function(tagName) {
       givenValues[tagName] = buildHtmlTagValue(nameValues[tagName], baseConstantsObject);
     });
 

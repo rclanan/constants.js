@@ -2,7 +2,7 @@
 
 var dictionary, build;
 
-dictionary = require('dictionary');
+dictionary = require('dictionary.js');
 
 function buildLocalizationValue(localizationValue, baseDictionary) {
   return {
@@ -17,11 +17,12 @@ function extendAddFunction(baseDictionary) {
   superAdd = baseDictionary.$add;
 
   baseDictionary.$add = function(nameValues) {
-    var givenValues;
+    var givenValues, nameValueNames;
 
     givenValues = {};
+    nameValueNames = Object.keys(nameValues);
 
-    nameValues.forEach(function(localizationName) {
+    nameValueNames.forEach(function(localizationName) {
       givenValues[localizationName] = buildLocalizationValue(nameValues[localizationName], baseDictionary);
     });
 
