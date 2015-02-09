@@ -3,7 +3,7 @@
 var domConstants, predefinedIds, build;
 
 domConstants = require('./../helpers/domConstants');
-predefinedIds = require('../predefined/ids').predefined
+predefinedIds = require('../predefined/ids.json')
 
 build = function() {
   var ids = domConstants.build({

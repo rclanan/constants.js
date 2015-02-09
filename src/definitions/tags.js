@@ -3,7 +3,7 @@
 var dictionary, predefinedTags, build;
 
 dictionary = require('dictionary.js');
-predefinedTags = require('../predefined/tags').predefined;
+predefinedTags = require('../predefined/tags.json');
 
 function buildHtmlTagValue(tagName, baseConstantsObject) {
   var html = '<' + tagName + ' />';

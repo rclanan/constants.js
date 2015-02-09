@@ -3,7 +3,7 @@
 var dictionary, predefinedEvents, build;
 
 dictionary = require('dictionary.js');
-predefinedEvents = require('../predefined/events').predefined;
+predefinedEvents = require('../predefined/events.json');
 
 build = function() {
   var events = dictionary.build({

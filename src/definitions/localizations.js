@@ -3,7 +3,7 @@
 var dictionary, predefinedLocalizations, build;
 
 dictionary = require('dictionary.js');
-predefinedLocalizations = require('../predefined/localizations').predefined;
+predefinedLocalizations = require('../predefined/localizations.json');
 
 function buildLocalizationValue(localizationValue, baseDictionary) {
   return {

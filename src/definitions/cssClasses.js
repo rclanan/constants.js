@@ -3,7 +3,7 @@
 var domConstants, predefinedClasses, build;
 
 domConstants = require('../helpers/domConstants');
-predefinedClasses = require('../predefined/cssClasses').predefined;
+predefinedClasses = require('../predefined/cssClasses.json');
 
 build = function() {
   var classes = domConstants.build({

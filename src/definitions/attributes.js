@@ -3,7 +3,7 @@
 var dictionary, predefinedAttributes, build;
 
 dictionary = require('dictionary.js');
-predefinedAttributes = require('../predefined/attributes').predefined;
+predefinedAttributes = require('../predefined/attributes.json');
 
 build = function() {
     var attributes = dictionary.build({
