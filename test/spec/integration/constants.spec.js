@@ -1,10 +1,10 @@
 'use strict';
 
 var constantsBuilder;
-constantsBuilder = require('../../../../src/constants');
+constantsBuilder = require('../../../src/constants');
 
 
-describe('constasts integration test', function() {
+describe('constants integration test', function() {
   var constants;
 
   beforeAll(function(){

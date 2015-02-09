@@ -2,4 +2,4 @@
 
 var gulp = require('gulp');
 
-gulp.task('default', ['cleanify', 'jslint', 'karma', 'complexity', 'uglifyJs']);
+gulp.task('default', ['cleanify', 'jslint', 'karma:all', 'complexity', 'uglifyJs']);
