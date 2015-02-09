@@ -1,8 +1,9 @@
 'use strict';
 
-var constantsBuilder;
-constantsBuilder = require('../../../src/constants');
+var baseLibrary, constantsBuilder;
 
+baseLibrary = require('../../locationHelpers/baseLibrary');
+constantsBuilder = baseLibrary.constants;
 
 describe('constants integration test', function() {
   var constants;
