@@ -5,8 +5,7 @@ var baseLibrary, constantsBuilder;
 baseLibrary = require('../../locationHelpers/baseLibrary');
 constantsBuilder = baseLibrary.constants;
 
-
-describe('constasts integration test', function() {
+describe('constants integration test', function() {
   var constants;
 
   beforeAll(function(){
