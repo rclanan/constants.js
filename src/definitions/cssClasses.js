@@ -1,8 +1,9 @@
 'use strict';
 
-var domConstants, build;
+var domConstants, predefinedClasses, build;
 
 domConstants = require('../helpers/domConstants');
+predefinedClasses = require('../predefined/cssClasses').predefined;
 
 build = function() {
   var classes = domConstants.build({
@@ -10,10 +11,7 @@ build = function() {
     selectorSymbol: '.'
   });
 
-  classes.$add({
-    active: 'active',
-    inactive: 'inactive'
-  });
+  classes.$add(predefinedClasses);
 
   return classes;
 };

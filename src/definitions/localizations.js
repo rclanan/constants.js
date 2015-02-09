@@ -1,8 +1,9 @@
 'use strict';
 
-var dictionary, build;
+var dictionary, predefinedLocalizations, build;
 
 dictionary = require('dictionary.js');
+predefinedLocalizations = require('../predefined/localizations').predefined;
 
 function buildLocalizationValue(localizationValue, baseDictionary) {
   return {
@@ -49,7 +50,7 @@ build = function() {
 
   extendAddFunction(localizations);
 
-  localizations.$add({});
+  localizations.$add(predefinedLocalizations);
 
   return localizations;
 };

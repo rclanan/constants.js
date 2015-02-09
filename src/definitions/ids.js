@@ -1,8 +1,9 @@
 'use strict';
 
-var domConstants, build;
+var domConstants, predefinedIds, build;
 
 domConstants = require('./../helpers/domConstants');
+predefinedIds = require('../predefined/ids').predefined
 
 build = function() {
   var ids = domConstants.build({
@@ -10,7 +11,7 @@ build = function() {
     selectorSymbol: '#'
   });
 
-  ids.$add({});
+  ids.$add(predefinedIds);
 
   return ids;
 };
